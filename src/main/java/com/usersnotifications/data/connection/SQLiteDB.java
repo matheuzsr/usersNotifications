@@ -9,9 +9,22 @@ import java.sql.Statement;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class SQLiteDB {
-    Connection conn = null;
-    Statement stmt;
-    ResultSet rs;
+    private Connection conn = null;
+    private Statement stmt;
+    private ResultSet rs;
+
+    private static SQLiteDB instance;
+
+    public SQLiteDB() {
+    }
+
+    public static SQLiteDB getInstance() {
+        if (instance == null) {
+            instance = new SQLiteDB();
+        }
+
+        return instance;
+    }
 
     public Connection conectar() throws SQLException {
         String uri = this.getUriConexao();

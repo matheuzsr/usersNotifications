@@ -1,23 +1,19 @@
 package com.usersnotifications.data.dao;
 
+import com.usersnotifications.dto.UserDTO;
 import java.util.Collection;
-import java.util.List;
-
-import com.usersnotifications.model.User;
 
 public interface UserDAO {
 
-    public boolean add(User user) throws Exception;
+    public void add(UserDTO userDTO) throws Exception;
+
+    public UserDTO getUserByName(String nome) throws Exception;
+
+    public UserDTO getById(int searchId) throws Exception;
+
+    public Collection<UserDTO> getAll() throws Exception;
+
+    public boolean update(UserDTO userDTO) throws Exception;
 
     public boolean delete(int idUser) throws Exception;
-
-    public List<User> getUserByName(String nome) throws Exception;
-
-    public boolean contains(User user);
-
-    public User getById(int searchId) throws Exception;
-
-    public Collection<User> getAll() throws Exception;
-
-    public boolean update(User user) throws Exception;
 }
