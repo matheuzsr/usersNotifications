@@ -2,11 +2,12 @@ package com.usersnotifications.model;
 
 public class User {
   private int idUser;
-  private String nome;
+  private String name;
+  private String type;
 
-  public User(int idUser, String nome) {
+  public User(int idUser, String name) {
     this.idUser = idUser;
-    this.nome = nome;
+    this.name = name;
   }
 
   public User() {
@@ -20,12 +21,19 @@ public class User {
     this.idUser = idUser;
   }
 
-  public String getNome() {
-    return nome;
+  public String getName() {
+    return name;
   }
 
-  public void setNome(String nome) {
-    this.nome = nome;
+  public void setName(String name) {
+    this.name = name;
   }
 
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
 }
