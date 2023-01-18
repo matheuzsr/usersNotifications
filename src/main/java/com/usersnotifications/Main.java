@@ -6,9 +6,9 @@ package com.usersnotifications;
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.dao.UserDAOSQLite;
+import com.usersnotifications.data.repository.NotificationUserRepositorySQLite;
 import com.usersnotifications.presenter.MainWindowPresenter;
 import com.usersnotifications.presenter.sign.SignPresenter;
-
 import io.github.cdimascio.dotenv.Dotenv;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,22 +21,13 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+
             Dotenv dotenv = Dotenv.configure().load();
             UserDAO userDAO = new UserDAOSQLite();
 
             EncryptorPassword encryptorPassword = new EncryptorPassword(dotenv);
-
+//            new MainWindowPresenter().setVisibleView();
             new SignPresenter(userDAO, new MainWindowPresenter(), encryptorPassword);
-
-            // Boolean dontHaveUserRegistered = userDAO.getAll().isEmpty();
-            // if (dontHaveUserRegistered) {
-            // new LoginPresenterFirstAccess(userDAO, new MainWindowPresenter(),
-            // encryptorPassword);
-            // } else {
-            // new LoginPresenterConventinalState(userDAO, new MainWindowPresenter(),
-            // encryptorPassword);
-
-            // }
 
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

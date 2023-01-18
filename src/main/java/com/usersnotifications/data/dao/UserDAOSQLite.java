@@ -19,16 +19,20 @@ public class UserDAOSQLite implements UserDAO {
 
         StringBuilder str = new StringBuilder();
 
+        // TODO: Alterar maneira paleativa de tratativa para null (getType e getActivedAt)
         str.append("INSERT INTO");
         str.append(" user(username, encrypt_password, type, actived_at)");
         str.append(" VALUES ('");
         str.append(user.getName()).append("'").append(",").append("'");
         str.append(user.getPassword()).append("'").append(",").append("'");
-        str.append(user.getType()).append("'").append(",").append("'");
-        str.append(user.getActivedAt()).append("'");
+        str.append(
+                user.getType() == null ? "" : user.getType()).append("'").append(",").append("'");
+        str.append(
+                user.getActivedAt() == null ? "" : user.getActivedAt()).append("'");
         str.append(")");
 
         BD.atualizar(str.toString());
+
         BD.close();
     }
 

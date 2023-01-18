@@ -4,6 +4,10 @@
  */
 package com.usersnotifications.view;
 
+import javax.swing.JDesktopPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
 /**
  *
  * @author logcomex
@@ -156,7 +160,7 @@ public class MainWindowView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem changePassordMenuItem;
-    private javax.swing.JDesktopPane desktopPane;
+    private static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu managerAccountMenu;
     private javax.swing.JMenu managerMenu;
     private javax.swing.JMenuBar menuBar;
@@ -165,5 +169,29 @@ public class MainWindowView extends javax.swing.JFrame {
     private javax.swing.JMenuItem usersAuthorizedMenuItem;
     private javax.swing.JMenuItem viewNotificationMenuItem;
     // End of variables declaration//GEN-END:variables
+
+    public static JDesktopPane getDesktop() {
+        return desktopPane;
+    }
+
+    public JMenuItem getChangePassordMenuItem() {
+        return changePassordMenuItem;
+    }
+
+    public JMenu getNotificationMenu() {
+        return notificationMenu;
+    }
+
+    public JMenuItem getSendNotificationMenuItem() {
+        return sendNotificationMenuItem;
+    }
+
+    public JMenuItem getUsersAuthorizedMenuItem() {
+        return usersAuthorizedMenuItem;
+    }
+
+    public JMenuItem getViewNotificationMenuItem() {
+        return viewNotificationMenuItem;
+    }
 
 }
