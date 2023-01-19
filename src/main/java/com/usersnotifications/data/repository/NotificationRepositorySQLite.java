@@ -5,7 +5,7 @@
 package com.usersnotifications.data.repository;
 
 import com.usersnotifications.data.connection.SQLiteDB;
-import com.usersnotifications.dto.NotificationDTO;
+import com.usersnotifications.model.Notification;
 import com.usersnotifications.dto.UserDTO;
 
 import java.time.LocalDate;
@@ -16,11 +16,11 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-public class NotificationUserRepositorySQLite implements NotificationUserRepository {
+public class NotificationRepositorySQLite implements NotificationRepository {
     private final SQLiteDB BD = new SQLiteDB();
 
     @Override
-    public void add(NotificationDTO notificationDTO) throws Exception {
+    public void add(Notification notification) throws Exception {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -30,28 +30,27 @@ public class NotificationUserRepositorySQLite implements NotificationUserReposit
     }
 
     @Override
-    public Collection<NotificationDTO> getAll(int userId) throws Exception {
-        List<NotificationDTO> notifcationList = new ArrayList<>();
+    public Collection<Notification> getToAll(int userId) throws Exception {
+        List<Notification> notifcationList = new ArrayList<>();
 
         try {
             StringBuilder str = new StringBuilder();
-            str.append(
-                    "SELECT notification.id as notification_id, notification.description as description,  user.username as from_username, read_at, sent_at FROM notification ");
-            str.append("JOIN notification_user on notification.id = notification_user.notification_id ");
-            str.append("JOIN user on user.id = notification_user.from_user_id ");
-            str.append("WHERE notification_user.to_user_id = ");
+            str.append("SELECT notification.id, description, user.username as from_username, read_at, sent_at ");
+            str.append("FROM notification ");
+            str.append("JOIN user on notification.from_user_id = user.id ");
+            str.append("WHERE notification.to_user_id = ");
             str.append(userId);
 
             BD.conectar();
             BD.consultar(str.toString());
 
             while (BD.getRs().next()) {
-                int notificationId = BD.getRs().getInt("notification_id");
+                int notificationId = BD.getRs().getInt("id");
                 String fromUsername = BD.getRs().getString("from_username");
                 LocalDate sentAt = LocalDate.parse(BD.getRs().getString("sent_at"),
                         DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-                NotificationDTO notification = new NotificationDTO(notificationId, fromUsername, sentAt);
+                Notification notification = new Notification(notificationId, fromUsername, sentAt);
 
                 String description = BD.getRs().getString("description");
                 notification.setDescription(description);
@@ -76,7 +75,19 @@ public class NotificationUserRepositorySQLite implements NotificationUserReposit
 
     @Override
     public boolean read(int notificationId) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+		StringBuilder str = new StringBuilder();
+
+		BD.conectar();
+
+		str.append(" UPDATE notification ");
+		str.append(" set ");
+		str.append(" read_at = ").append("'").append(LocalDate.now()).append("'");
+		str.append(" Where id =").append(notificationId);
+
+		BD.atualizar(str.toString());
+		BD.close();
+
+		return true;
     }
 
     @Override

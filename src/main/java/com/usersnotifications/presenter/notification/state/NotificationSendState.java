@@ -1,6 +1,6 @@
 package com.usersnotifications.presenter.notification.state;
 
-import com.usersnotifications.dto.NotificationDTO;
+import com.usersnotifications.model.Notification;
 import com.usersnotifications.presenter.notification.NotificationPresenter;
 
 public class NotificationSendState extends NotificationState {
@@ -14,7 +14,7 @@ public class NotificationSendState extends NotificationState {
   }
 
   @Override
-  public void send(NotificationDTO notificationDTO) throws Exception {
+  public void send(Notification notification) throws Exception {
     throw new RuntimeException("Você deve implementar o método send!");
   }
 }
