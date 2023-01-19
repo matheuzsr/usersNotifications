@@ -6,7 +6,7 @@ package com.usersnotifications;
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.dao.UserDAOSQLite;
-import com.usersnotifications.data.repository.NotificationUserRepositorySQLite;
+import com.usersnotifications.data.repository.NotificationRepositorySQLite;
 import com.usersnotifications.presenter.MainWindowPresenter;
 import com.usersnotifications.presenter.sign.SignPresenter;
 import io.github.cdimascio.dotenv.Dotenv;

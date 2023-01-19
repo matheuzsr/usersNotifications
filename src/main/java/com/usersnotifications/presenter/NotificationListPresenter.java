@@ -7,31 +7,41 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.time.LocalDate;
 
-import com.usersnotifications.data.repository.NotificationUserRepository;
-import com.usersnotifications.dto.NotificationDTO;
+import com.usersnotifications.model.Notification;
+import com.usersnotifications.presenter.notification.NotificationPresenter;
 import com.usersnotifications.view.NotificationListView;
+import com.usersnotifications.data.repository.NotificationRepository;
 
 public class NotificationListPresenter {
   private NotificationListView view;
   private DefaultTableModel table;
-  private NotificationUserRepository repository;
+  private NotificationRepository repository;
 
-  public NotificationListPresenter(NotificationUserRepository repository) throws Exception {
+  public NotificationListPresenter(NotificationRepository repository) throws Exception {
     this.view = new NotificationListView();
     this.repository = repository;
-    
+
     this.screenConfiguration();
   }
 
   private void screenConfiguration() {
+
+    view.getVisualizationBtn().addActionListener((ActionEvent ae) -> {
+      this.handleNotificationVisualization();
+    });
+
+    view.getCloseBtn().addActionListener((ActionEvent ae) -> {
+      view.dispose();
+    });
     try {
       this.createTable();
-      this.carregarTabela(this.repository.getAll(2));
+      this.carregarTabela(this.repository.getToAll(2));
     } catch (Exception ex) {
       JOptionPane.showMessageDialog(null, ex.getStackTrace());
     }
-
   }
 
   private void createTable() {
@@ -53,15 +63,13 @@ public class NotificationListPresenter {
 
     Iterator<?> it = c.iterator();
     while (it.hasNext()) {
-      // TODO: Usar NotificationDTO para preencer a tabela
-
-      NotificationDTO notification = (NotificationDTO) it.next();
+      Notification notification = (Notification) it.next();
       this.table.addRow(new Object[] {
-      notification.getId(),
-      notification.getFromUsername(),
-      notification.getSentAt(),
-      notification.getReadAt(),
-      notification.getDescription()
+          notification.getId(),
+          notification.getFromUsername(),
+          notification.getSentAt(),
+          notification.getReadAt(),
+          notification.getDescription()
       });
     }
 
@@ -71,6 +79,36 @@ public class NotificationListPresenter {
     centerRenderer.setHorizontalAlignment(JLabel.CENTER);
     view.getNotificationTbl().getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
   }
+
+  private void handleNotificationVisualization() {
+    int row = this.view.getNotificationTbl().getSelectedRow();
+    this.showMessageIfNotSelectedList(row);
+
+    int notificationId = (int) view.getNotificationTbl().getValueAt(row, 0);
+    String NotificationtoUser = (String) view.getNotificationTbl().getValueAt(row, 1);
+    LocalDate NotificationsentAt = (LocalDate) view.getNotificationTbl().getValueAt(row, 2);
+    
+    Notification notification = new Notification(notificationId, NotificationtoUser, NotificationsentAt);
+    try {
+      if(this.repository.read(notificationId)) {
+        NotificationPresenter presenter = new NotificationPresenter(this.repository,
+                notification);
+                
+                MainWindowPresenter.showPanel(presenter.getView(), false, false);
+      }
+
+                
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(view, ex.getMessage());
+    }
+  }
+
+  private void showMessageIfNotSelectedList(int row) {
+    if (row == -1) {
+        JOptionPane.showMessageDialog(view, "Você precisa selecionar uma LINHA da tabela!");
+        return;
+    }
+}
 
   public NotificationListView getView() {
     return view;

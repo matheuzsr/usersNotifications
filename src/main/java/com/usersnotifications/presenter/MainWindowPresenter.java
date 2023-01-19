@@ -6,7 +6,7 @@ import javax.management.Notification;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
-import com.usersnotifications.data.repository.NotificationUserRepositorySQLite;
+import com.usersnotifications.data.repository.NotificationRepositorySQLite;
 import com.usersnotifications.presenter.notification.NotificationPresenter;
 import com.usersnotifications.presenter.notification.state.NotificationSendState;
 import com.usersnotifications.presenter.notification.state.NotificationState;
@@ -26,7 +26,7 @@ public class MainWindowPresenter {
         
         this.view.getSendNotificationMenuItem().addActionListener((ActionEvent e) -> {
             try {
-                NotificationPresenter presenter = new NotificationPresenter(new NotificationUserRepositorySQLite(), null);
+                NotificationPresenter presenter = new NotificationPresenter(new NotificationRepositorySQLite(), null);
                 
                 showPanel(presenter.getView(), false, false);
             } catch (Exception ex) {
@@ -36,7 +36,7 @@ public class MainWindowPresenter {
 
         this.view.getViewNotificationMenuItem().addActionListener((ActionEvent e) -> {
             try {
-                NotificationListPresenter presenter = new NotificationListPresenter(new NotificationUserRepositorySQLite());
+                NotificationListPresenter presenter = new NotificationListPresenter(new NotificationRepositorySQLite());
                 
                 showPanel(presenter.getView(), false, false);
             } catch (Exception ex) {

@@ -1,16 +1,17 @@
 package com.usersnotifications.data.repository;
 
-import com.usersnotifications.dto.NotificationDTO;
+import com.usersnotifications.model.Notification;
 import com.usersnotifications.dto.UserDTO;
 import java.util.Collection;
 
-public interface NotificationUserRepository {
+// Foi criado como repository pois utiliza-se de duas tabelas 
+public interface NotificationRepository {
 
-    public void add(NotificationDTO notificationDTO) throws Exception;
+    public void add(Notification notification) throws Exception;
 
     public UserDTO getById(int notificationId) throws Exception;
 
-    public Collection<NotificationDTO> getAll(int userId) throws Exception;
+    public Collection<Notification> getToAll(int userId) throws Exception;
 
     public boolean read(int notificationId) throws Exception;
 

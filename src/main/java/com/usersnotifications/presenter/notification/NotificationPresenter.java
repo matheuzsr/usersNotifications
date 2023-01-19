@@ -1,30 +1,30 @@
 package com.usersnotifications.presenter.notification;
 
-import com.usersnotifications.data.repository.NotificationUserRepository;
-import com.usersnotifications.dto.NotificationDTO;
+import com.usersnotifications.model.Notification;
 import com.usersnotifications.presenter.notification.state.NotificationSendState;
 import com.usersnotifications.presenter.notification.state.NotificationState;
 import com.usersnotifications.presenter.notification.state.NotificationVisualizationState;
 import com.usersnotifications.view.NotificationView;
+import com.usersnotifications.data.repository.NotificationRepository;
 
 public class NotificationPresenter {
   private NotificationView view;
   private NotificationState state;
-  private NotificationUserRepository repository;
+  private NotificationRepository repository;
 
-  public NotificationPresenter(NotificationUserRepository repository, NotificationDTO notificationDTO) {
+  public NotificationPresenter(NotificationRepository repository, Notification notification) {
     this.view = new NotificationView();
     this.repository = repository;
 
-    if (notificationDTO == null) {
+    if (notification == null) {
       this.setState(new NotificationSendState(this));
     } else {
       this.setState(new NotificationVisualizationState(this));
     }
   }
 
-  public void send(NotificationDTO notificationDTO) throws Exception {
-    this.state.send(notificationDTO);
+  public void send(Notification notification) throws Exception {
+    this.state.send(notification);
   }
 
   public void setState(NotificationState state) {
@@ -43,7 +43,7 @@ public class NotificationPresenter {
     return this.state;
   }
 
-  public NotificationUserRepository getRepository() {
+  public NotificationRepository getRepository() {
     return this.repository;
   }
 }

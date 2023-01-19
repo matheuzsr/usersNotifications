@@ -1,8 +1,10 @@
 package com.usersnotifications.presenter.sign.command;
 
+import com.usersnotifications.business.Session;
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
+import com.usersnotifications.model.User;
 
 public class SignInCommand extends SignCommand {
 
@@ -17,10 +19,22 @@ public class SignInCommand extends SignCommand {
 
     boolean isEquals = this.encryptorPassword.comparePassword(user.getPassword(), encryptedPassword);
 
-    if(!isEquals) {
+    if (!isEquals) {
       throw new Exception("Senha incorreta");
     }
-    
+
+    this.setSession(existUser);
+
     return isEquals;
+  }
+
+  private void setSession(UserDTO user) {
+    Session session = Session.getInstance();
+    User userSession = new User();
+
+    userSession.setIdUser(user.getIdUser());
+    userSession.setName(user.getName());
+    userSession.setType(user.getType());
+    session.setUser(userSession);
   }
 }

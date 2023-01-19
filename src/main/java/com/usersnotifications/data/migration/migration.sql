@@ -9,17 +9,11 @@ actived_at date
 CREATE TABLE notification (
 id INTEGER primary key AUTOINCREMENT not null,
 description varchar(100) not null
-);
-
-CREATE TABLE notification_user (
-id INTEGER primary key AUTOINCREMENT not null,
-notification_id int,
 created_at date,
 read_at date,
 from_user_id int,
 to_user_id int,
 sent_at date,
-FOREIGN KEY (notification_id) REFERENCES notification(id),
 FOREIGN KEY (from_user_id) REFERENCES user(id),
 FOREIGN KEY (to_user_id) REFERENCES user(id)
 );

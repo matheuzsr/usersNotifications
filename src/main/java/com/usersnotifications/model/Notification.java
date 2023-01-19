@@ -1,8 +1,8 @@
-package com.usersnotifications.dto;
+package com.usersnotifications.model;
 
 import java.time.LocalDate;
 
-public class NotificationDTO {
+public class Notification {
     private int id;
     private String fromUsername;
     private String toUsername;
@@ -13,7 +13,7 @@ public class NotificationDTO {
     private LocalDate readAt;
     private LocalDate createdAt;
 
-    public NotificationDTO(int id, String fromUsername, LocalDate sentAt) {
+    public Notification(int id, String fromUsername, LocalDate sentAt) {
         this.id = id;
         this.sentAt = sentAt;
         this.fromUsername = fromUsername;
