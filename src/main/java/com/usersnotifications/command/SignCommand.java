@@ -1,4 +1,4 @@
-package com.usersnotifications.presenter.sign.command;
+package com.usersnotifications.command;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.data.dao.UserDAO;

@@ -21,7 +21,7 @@ public class NotificationRepositorySQLite implements NotificationRepository {
 
     @Override
     public void add(Notification notification) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // TODO: Implementar aqui e chamar no NotificationCommand
     }
 
     @Override

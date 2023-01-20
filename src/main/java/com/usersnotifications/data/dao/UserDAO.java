@@ -13,6 +13,8 @@ public interface UserDAO {
 
     public Collection<UserDTO> getAll() throws Exception;
 
+    public Collection<UserDTO> getAllWithoutCurrentUser() throws Exception;
+
     public boolean update(UserDTO userDTO) throws Exception;
 
     public boolean delete(int idUser) throws Exception;

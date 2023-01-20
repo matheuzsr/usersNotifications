@@ -7,10 +7,10 @@ package com.usersnotifications.presenter.sign;
 import javax.swing.JOptionPane;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
+import com.usersnotifications.command.SignInCommand;
+import com.usersnotifications.command.SignUpCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.presenter.MainWindowPresenter;
-import com.usersnotifications.presenter.sign.command.SignInCommand;
-import com.usersnotifications.presenter.sign.command.SignUpCommand;
 import com.usersnotifications.presenter.sign.state.SignPresenterState;
 import com.usersnotifications.presenter.sign.state.signInState.SignInPresenterState;
 import com.usersnotifications.presenter.sign.state.signUp.SignUpPresenterAdminState;

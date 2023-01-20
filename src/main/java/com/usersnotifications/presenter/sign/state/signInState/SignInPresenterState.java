@@ -5,11 +5,11 @@
 package com.usersnotifications.presenter.sign.state.signInState;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
+import com.usersnotifications.command.SignCommand;
+import com.usersnotifications.command.SignUpCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.presenter.sign.SignPresenter;
-import com.usersnotifications.presenter.sign.command.SignCommand;
-import com.usersnotifications.presenter.sign.command.SignUpCommand;
 import com.usersnotifications.presenter.sign.state.SignPresenterState;
 import com.usersnotifications.presenter.sign.state.signUp.SignUpPresenterState;
 import com.usersnotifications.view.SignView;
@@ -37,6 +37,9 @@ public class SignInPresenterState extends SignPresenterState {
         view.getConfirmPasswordConfirmTxt().setVisible(false);
         view.getLoginBtn().setText("Entrar");
 
+        view.getRegisterLbl().setText("Se ainda não é usuário.");
+        view.getClickHereRegisterBtn().setText("Cadastre-se aqui");
+
         view.getClickHereRegisterBtn().addActionListener((ActionEvent ae) -> {
             UserDAO userDAO = this.presenter.getUserDAO();
             EncryptorPassword encryptorPassword = this.presenter.getEncryptorPassword();
@@ -61,6 +64,7 @@ public class SignInPresenterState extends SignPresenterState {
             boolean isSigned = this.signCommand.execute(user);
 
             if (isSigned) {
+                this.presenter.getView().dispose();
                 this.presenter.openMainWindow();
             }
 

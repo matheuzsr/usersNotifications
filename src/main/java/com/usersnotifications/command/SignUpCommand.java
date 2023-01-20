@@ -1,4 +1,4 @@
-package com.usersnotifications.presenter.sign.command;
+package com.usersnotifications.command;
 
 import java.time.LocalDate;
 

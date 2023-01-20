@@ -4,8 +4,11 @@
 package com.usersnotifications;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
+import com.usersnotifications.command.notification.NotificationCommand;
+import com.usersnotifications.command.notification.NotificationSendCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.dao.UserDAOSQLite;
+import com.usersnotifications.data.repository.NotificationRepository;
 import com.usersnotifications.data.repository.NotificationRepositorySQLite;
 import com.usersnotifications.presenter.MainWindowPresenter;
 import com.usersnotifications.presenter.sign.SignPresenter;
@@ -24,10 +27,13 @@ public class Main {
 
             Dotenv dotenv = Dotenv.configure().load();
             UserDAO userDAO = new UserDAOSQLite();
+            NotificationRepository notificationRepository = new NotificationRepositorySQLite();
+            NotificationCommand notificationCommand = new NotificationSendCommand(notificationRepository, userDAO);
 
             EncryptorPassword encryptorPassword = new EncryptorPassword(dotenv);
-//            new MainWindowPresenter().setVisibleView();
-            new SignPresenter(userDAO, new MainWindowPresenter(), encryptorPassword);
+
+            new SignPresenter(userDAO, new MainWindowPresenter(notificationRepository, userDAO, notificationCommand),
+                    encryptorPassword);
 
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

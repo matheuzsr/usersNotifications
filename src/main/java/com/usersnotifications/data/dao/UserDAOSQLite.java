@@ -1,10 +1,10 @@
 package com.usersnotifications.data.dao;
 
+import com.usersnotifications.business.Session;
 import com.usersnotifications.data.connection.SQLiteDB;
 import com.usersnotifications.dto.UserDTO;
-
+import com.usersnotifications.model.User;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +19,8 @@ public class UserDAOSQLite implements UserDAO {
 
         StringBuilder str = new StringBuilder();
 
-        // TODO: Alterar maneira paleativa de tratativa para null (getType e getActivedAt)
+        // TODO: Alterar maneira paleativa de tratativa para null (getType e
+        // getActivedAt)
         str.append("INSERT INTO");
         str.append(" user(username, encrypt_password, type, actived_at)");
         str.append(" VALUES ('");
@@ -73,6 +74,37 @@ public class UserDAOSQLite implements UserDAO {
 
         StringBuilder str = new StringBuilder();
         str.append("SELECT * FROM user");
+
+        BD.conectar();
+        BD.consultar(str.toString());
+
+        while (BD.getRs().next()) {
+            int id = BD.getRs().getInt("id");
+            String name = BD.getRs().getString("username");
+            String encryptPassword = BD.getRs().getString("encrypt_password");
+
+            UserDTO userDTO = new UserDTO(id, name, encryptPassword);
+
+            users.add(userDTO);
+        }
+
+        BD.close();
+
+        return users;
+    }
+
+    @Override
+    public Collection<UserDTO> getAllWithoutCurrentUser() throws Exception {
+        User currentUser = Session.getInstance().getUser();
+
+        // TODO: Refatorar e deixar o Stringbuilder separado e depois só incluir o
+        // where(código análago ao getAll)
+        List<UserDTO> users = new ArrayList<>();
+
+        StringBuilder str = new StringBuilder();
+        str.append("SELECT * FROM user ");
+        str.append("WHERE id <> ");
+        str.append(currentUser.getIdUser());
 
         BD.conectar();
         BD.consultar(str.toString());

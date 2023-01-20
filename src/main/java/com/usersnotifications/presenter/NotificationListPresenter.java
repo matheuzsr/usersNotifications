@@ -13,14 +13,16 @@ import java.time.LocalDate;
 import com.usersnotifications.model.Notification;
 import com.usersnotifications.presenter.notification.NotificationPresenter;
 import com.usersnotifications.view.NotificationListView;
+import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.repository.NotificationRepository;
 
 public class NotificationListPresenter {
   private NotificationListView view;
   private DefaultTableModel table;
   private NotificationRepository repository;
+  private UserDAO userDAO;
 
-  public NotificationListPresenter(NotificationRepository repository) throws Exception {
+  public NotificationListPresenter(NotificationRepository repository, UserDAO userDAO) throws Exception {
     this.view = new NotificationListView();
     this.repository = repository;
 
@@ -87,28 +89,26 @@ public class NotificationListPresenter {
     int notificationId = (int) view.getNotificationTbl().getValueAt(row, 0);
     String NotificationtoUser = (String) view.getNotificationTbl().getValueAt(row, 1);
     LocalDate NotificationsentAt = (LocalDate) view.getNotificationTbl().getValueAt(row, 2);
-    
+
     Notification notification = new Notification(notificationId, NotificationtoUser, NotificationsentAt);
     try {
-      if(this.repository.read(notificationId)) {
-        NotificationPresenter presenter = new NotificationPresenter(this.repository,
-                notification);
-                
-                MainWindowPresenter.showPanel(presenter.getView(), false, false);
+      if (this.repository.read(notificationId)) {
+        NotificationPresenter presenter = new NotificationPresenter(this.repository, this.userDAO, null, notification);
+
+        MainWindowPresenter.showPanel(presenter.getView(), false, false);
       }
 
-                
     } catch (Exception ex) {
-        JOptionPane.showMessageDialog(view, ex.getMessage());
+      JOptionPane.showMessageDialog(view, ex.getMessage());
     }
   }
 
   private void showMessageIfNotSelectedList(int row) {
     if (row == -1) {
-        JOptionPane.showMessageDialog(view, "Você precisa selecionar uma LINHA da tabela!");
-        return;
+      JOptionPane.showMessageDialog(view, "Você precisa selecionar uma LINHA da tabela!");
+      return;
     }
-}
+  }
 
   public NotificationListView getView() {
     return view;
