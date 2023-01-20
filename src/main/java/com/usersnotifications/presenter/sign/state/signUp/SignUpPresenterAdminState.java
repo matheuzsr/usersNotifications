@@ -5,11 +5,11 @@
 package com.usersnotifications.presenter.sign.state.signUp;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
+import com.usersnotifications.command.SignCommand;
+import com.usersnotifications.command.SignInCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.presenter.sign.SignPresenter;
-import com.usersnotifications.presenter.sign.command.SignCommand;
-import com.usersnotifications.presenter.sign.command.SignInCommand;
 import com.usersnotifications.presenter.sign.state.SignPresenterState;
 import com.usersnotifications.presenter.sign.state.signInState.SignInPresenterState;
 import com.usersnotifications.view.SignView;

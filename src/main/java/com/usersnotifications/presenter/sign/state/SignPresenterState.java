@@ -4,9 +4,9 @@
  */
 package com.usersnotifications.presenter.sign.state;
 
+import com.usersnotifications.command.SignCommand;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.presenter.sign.SignPresenter;
-import com.usersnotifications.presenter.sign.command.SignCommand;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;

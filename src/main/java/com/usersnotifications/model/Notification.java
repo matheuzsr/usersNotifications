@@ -19,6 +19,13 @@ public class Notification {
         this.fromUsername = fromUsername;
     }
 
+    public Notification(int fromUserId, int toUserId, String description, LocalDate sentAt) {
+        this.fromUserId = fromUserId;
+        this.toUserId = toUserId;
+        this.description = description;
+        this.sentAt = sentAt;
+    }
+
     public int getId() {
         return id;
     }

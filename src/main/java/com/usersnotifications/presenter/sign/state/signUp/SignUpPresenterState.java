@@ -5,12 +5,12 @@
 package com.usersnotifications.presenter.sign.state.signUp;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
+import com.usersnotifications.command.SignCommand;
+import com.usersnotifications.command.SignInCommand;
+import com.usersnotifications.command.SignUpCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.presenter.sign.SignPresenter;
-import com.usersnotifications.presenter.sign.command.SignCommand;
-import com.usersnotifications.presenter.sign.command.SignInCommand;
-import com.usersnotifications.presenter.sign.command.SignUpCommand;
 import com.usersnotifications.presenter.sign.state.SignPresenterState;
 import com.usersnotifications.presenter.sign.state.signInState.SignInPresenterState;
 import com.usersnotifications.view.SignView;
@@ -33,15 +33,22 @@ public class SignUpPresenterState extends SignPresenterState {
         SignView view = this.presenter.getView();
 
         view.setVisible(false);
-        view.getTitleLbl().setText("Cadastre-se");
+        view.getTitleLbl().setText("Cadastre e torne-se um usuário");
 
-        view.getClickHereRegisterBtn().setVisible(false);
-        view.getRegisterLbl().setVisible(false);
-
-        view.getPasswordConfirmLabel().setVisible(true);
         view.getConfirmPasswordConfirmTxt().setVisible(true);
+        view.getPasswordConfirmLabel().setVisible(true);
 
         this.presenter.getView().getLoginBtn().setText("Cadastrar");
+
+        view.getRegisterLbl().setText("Caso já seja usuário.");
+        view.getClickHereRegisterBtn().setText("Logar");
+        view.getClickHereRegisterBtn().addActionListener((ActionEvent ae) -> {
+            UserDAO userDAO = this.presenter.getUserDAO();
+            EncryptorPassword encryptorPassword = this.presenter.getEncryptorPassword();
+            SignInCommand signInCommand = new SignInCommand(userDAO, encryptorPassword);
+
+            this.presenter.setState(new SignInPresenterState(this.presenter, signInCommand));
+        });
 
         view.getLoginBtn().addActionListener((ActionEvent ae) -> {
             this.register();

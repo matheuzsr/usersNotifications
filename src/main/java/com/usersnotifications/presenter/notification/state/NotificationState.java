@@ -1,4 +1,5 @@
 package com.usersnotifications.presenter.notification.state;
+import java.awt.event.ActionEvent;
 
 import com.usersnotifications.model.Notification;
 import com.usersnotifications.presenter.notification.NotificationPresenter;
@@ -10,6 +11,8 @@ public abstract class NotificationState {
   public NotificationState(NotificationPresenter presenter, String title) {
     this.presenter = presenter;
     this.setTitle(title);
+
+    this.screenConfiguration();
   }
 
   public void setTitle(String title) {
@@ -18,7 +21,15 @@ public abstract class NotificationState {
     view.setTitle(title);
   }
 
-  public void send(Notification notification) throws Exception {
+  private void screenConfiguration() {
+    NotificationView view = this.presenter.getView();
+
+    view.getCloseBtn().addActionListener((ActionEvent e) -> {
+      view.dispose();
+    });
+  }
+
+  public void send() throws Exception {
     throw new RuntimeException("Você deve implementar o método send!");
   }
 

@@ -5,16 +5,24 @@ import com.usersnotifications.presenter.notification.state.NotificationSendState
 import com.usersnotifications.presenter.notification.state.NotificationState;
 import com.usersnotifications.presenter.notification.state.NotificationVisualizationState;
 import com.usersnotifications.view.NotificationView;
+import com.usersnotifications.command.notification.NotificationCommand;
+import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.repository.NotificationRepository;
 
 public class NotificationPresenter {
   private NotificationView view;
   private NotificationState state;
-  private NotificationRepository repository;
+  private NotificationRepository notificationRepository;
+  private UserDAO userDAO;
+  private NotificationCommand notificationCommand;
 
-  public NotificationPresenter(NotificationRepository repository, Notification notification) {
+  public NotificationPresenter(NotificationRepository notificationRepository, UserDAO userDAO,
+      NotificationCommand notificationCommand, Notification notification) {
     this.view = new NotificationView();
-    this.repository = repository;
+
+    this.notificationRepository = notificationRepository;
+    this.userDAO = userDAO;
+    this.notificationCommand = notificationCommand;
 
     if (notification == null) {
       this.setState(new NotificationSendState(this));
@@ -23,8 +31,8 @@ public class NotificationPresenter {
     }
   }
 
-  public void send(Notification notification) throws Exception {
-    this.state.send(notification);
+  public void send() throws Exception {
+    this.state.send();
   }
 
   public void setState(NotificationState state) {
@@ -43,7 +51,15 @@ public class NotificationPresenter {
     return this.state;
   }
 
-  public NotificationRepository getRepository() {
-    return this.repository;
+  public NotificationRepository getNotificationRepository() {
+    return this.notificationRepository;
+  }
+
+  public UserDAO getUserDAO() {
+    return userDAO;
+  }
+
+  public NotificationCommand getNotificationCommand() {
+    return notificationCommand;
   }
 }

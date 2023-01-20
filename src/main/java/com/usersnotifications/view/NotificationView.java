@@ -48,8 +48,6 @@ public class NotificationView extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Para");
 
-        toUserSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         sendBtn.setText("Enviar");
 
         closeBtn.setText("Fechar");
