@@ -11,7 +11,6 @@ public class Notification {
     private int toUserId;
     private LocalDate sentAt;
     private LocalDate readAt;
-    private LocalDate createdAt;
 
     public Notification(int id, String fromUsername, LocalDate sentAt) {
         this.id = id;
@@ -24,6 +23,9 @@ public class Notification {
         this.toUserId = toUserId;
         this.description = description;
         this.sentAt = sentAt;
+    }
+
+    public Notification() {
     }
 
     public int getId() {
@@ -88,13 +90,5 @@ public class Notification {
 
     public void setReadAt(LocalDate readAt) {
         this.readAt = readAt;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
     }
 }

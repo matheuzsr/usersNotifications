@@ -1,21 +1,20 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package com.usersnotifications.view;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
  *
  * @author matheus-ufes
  */
-public class ChangePasswordView extends javax.swing.JFrame {
+public class ChangePasswordView extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form SendNotification
      */
     public ChangePasswordView() {
         initComponents();
@@ -30,18 +29,25 @@ public class ChangePasswordView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        titleLbl = new javax.swing.JLabel();
         usernameLbl = new javax.swing.JLabel();
+        currentPasswordTxt = new javax.swing.JTextField();
         passwordLbl = new javax.swing.JLabel();
         newPasswordTxt = new javax.swing.JTextField();
-        currentPasswordTxt = new javax.swing.JTextField();
-        changePasswordBtn = new javax.swing.JButton();
-        titleLbl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         confirmNewPasswordTxt = new javax.swing.JTextField();
+        changePasswordBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        titleLbl.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        titleLbl.setText("Alteração de Senha");
 
         usernameLbl.setText("Senha atual");
+
+        currentPasswordTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                currentPasswordTxtActionPerformed(evt);
+            }
+        });
 
         passwordLbl.setText("Senha nova");
 
@@ -51,17 +57,6 @@ public class ChangePasswordView extends javax.swing.JFrame {
             }
         });
 
-        currentPasswordTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                currentPasswordTxtActionPerformed(evt);
-            }
-        });
-
-        changePasswordBtn.setText("Alterar");
-
-        titleLbl.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        titleLbl.setText("Alteração de Senha");
-
         jLabel1.setText("Confirmar senha");
 
         confirmNewPasswordTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -70,18 +65,16 @@ public class ChangePasswordView extends javax.swing.JFrame {
             }
         });
 
+        changePasswordBtn.setText("Alterar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(288, Short.MAX_VALUE)
+                .addContainerGap(290, Short.MAX_VALUE)
                 .addComponent(changePasswordBtn)
                 .addGap(46, 46, 46))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(titleLbl)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,13 +87,17 @@ public class ChangePasswordView extends javax.swing.JFrame {
                     .addComponent(newPasswordTxt)
                     .addComponent(currentPasswordTxt))
                 .addGap(60, 60, 60))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addComponent(titleLbl)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(40, 40, 40)
                 .addComponent(titleLbl)
-                .addGap(35, 35, 35)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameLbl)
                     .addComponent(currentPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -112,7 +109,7 @@ public class ChangePasswordView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(confirmNewPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(changePasswordBtn)
                 .addGap(24, 24, 24))
         );
@@ -120,74 +117,32 @@ public class ChangePasswordView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void newPasswordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPasswordTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newPasswordTxtActionPerformed
-
     private void currentPasswordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentPasswordTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_currentPasswordTxtActionPerformed
+
+    private void newPasswordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPasswordTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newPasswordTxtActionPerformed
 
     private void confirmNewPasswordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmNewPasswordTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_confirmNewPasswordTxtActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChangePasswordView().setVisible(true);
-            }
-        });
-    }
-
-    public JTextField getPasswordTxt() {
-        return newPasswordTxt;
-    }
-
-    public JTextField getUsernameTxt() {
-        return currentPasswordTxt;
-    }
-
-    public JButton getLoginBtn() {
+    public JButton getChangePasswordBtn() {
         return changePasswordBtn;
     }
 
-    public JLabel getTitleLbl() {
-        return titleLbl;
+    public JTextField getConfirmNewPasswordTxt() {
+        return confirmNewPasswordTxt;
+    }
+
+    public JTextField getCurrentPasswordTxt() {
+        return currentPasswordTxt;
+    }
+
+    public JTextField getNewPasswordTxt() {
+        return newPasswordTxt;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

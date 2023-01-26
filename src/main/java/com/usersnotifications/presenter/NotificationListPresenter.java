@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import com.usersnotifications.model.Notification;
 import com.usersnotifications.presenter.notification.NotificationPresenter;
 import com.usersnotifications.view.NotificationListView;
+import com.usersnotifications.business.Session;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.repository.NotificationRepository;
 
@@ -40,7 +41,9 @@ public class NotificationListPresenter {
     });
     try {
       this.createTable();
-      this.carregarTabela(this.repository.getToAll(2));
+      int currentUserId = Session.getInstance().getUser().getIdUser();
+
+      this.carregarTabela(this.repository.getReceivedAll(currentUserId));
     } catch (Exception ex) {
       JOptionPane.showMessageDialog(null, ex.getStackTrace());
     }
@@ -50,7 +53,7 @@ public class NotificationListPresenter {
     this.table = new DefaultTableModel(
         new Object[][] {},
         new String[] {
-            "id", "De", "Data de envio", "Lida", "Descrição"
+            "id", "De", "Para", "Data de envio", "Lida", "Descrição"
         }) {
       @Override
       public boolean isCellEditable(int row, int col) {
@@ -69,6 +72,7 @@ public class NotificationListPresenter {
       this.table.addRow(new Object[] {
           notification.getId(),
           notification.getFromUsername(),
+          notification.getToUsername(),
           notification.getSentAt(),
           notification.getReadAt(),
           notification.getDescription()
@@ -87,10 +91,16 @@ public class NotificationListPresenter {
     this.showMessageIfNotSelectedList(row);
 
     int notificationId = (int) view.getNotificationTbl().getValueAt(row, 0);
-    String NotificationtoUser = (String) view.getNotificationTbl().getValueAt(row, 1);
-    LocalDate NotificationsentAt = (LocalDate) view.getNotificationTbl().getValueAt(row, 2);
+    String fromUser = (String) view.getNotificationTbl().getValueAt(row, 1);
+    String toUser = (String) view.getNotificationTbl().getValueAt(row, 2);
+    String description = (String) view.getNotificationTbl().getValueAt(row, 5);
 
-    Notification notification = new Notification(notificationId, NotificationtoUser, NotificationsentAt);
+    Notification notification = new Notification();
+    notification.setId(notificationId);
+    notification.setFromUsername(fromUser);
+    notification.setToUsername(toUser);
+    notification.setDescription(description);
+
     try {
       if (this.repository.read(notificationId)) {
         NotificationPresenter presenter = new NotificationPresenter(this.repository, this.userDAO, null, notification);

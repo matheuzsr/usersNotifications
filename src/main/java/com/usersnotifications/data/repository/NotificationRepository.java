@@ -11,7 +11,9 @@ public interface NotificationRepository {
 
     public UserDTO getById(int notificationId) throws Exception;
 
-    public Collection<Notification> getToAll(int userId) throws Exception;
+    public Collection<Notification> getReceivedAll(int userId) throws Exception;
+    
+    public Collection<Notification> getSentAll(int userId) throws Exception;
 
     public boolean read(int notificationId) throws Exception;
 

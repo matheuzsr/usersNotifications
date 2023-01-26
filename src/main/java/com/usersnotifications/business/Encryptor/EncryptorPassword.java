@@ -24,7 +24,7 @@ public class EncryptorPassword {
 
   }
 
-  public Boolean comparePassword(String password, String passwordEncrypted) {
+  public boolean comparePassword(String password, String passwordEncrypted) {
     return password.equals(this.encryptor.decrypt(passwordEncrypted));
   }
 }

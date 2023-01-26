@@ -65,7 +65,23 @@ public class UserDAOSQLite implements UserDAO {
 
     @Override
     public UserDTO getById(int searchId) throws Exception {
-        return null;
+        StringBuilder str = new StringBuilder();
+        str.append("SELECT * FROM user");
+        str.append(" WHERE id='");
+        str.append(searchId).append("'");
+
+        BD.conectar();
+        BD.consultar(str.toString());
+
+        int id = BD.getRs().getInt("id");
+        String name = BD.getRs().getString("username");
+        String encryptPassword = BD.getRs().getString("encrypt_password");
+
+        UserDTO userDTO = new UserDTO(id, name, encryptPassword);
+
+        BD.close();
+
+        return userDTO;
     }
 
     @Override
@@ -125,13 +141,23 @@ public class UserDAOSQLite implements UserDAO {
     }
 
     @Override
-    public boolean update(UserDTO userDTO) throws Exception {
-        return false;
+    public boolean updatePassword(UserDTO userDTO) throws Exception {
+        StringBuilder str = new StringBuilder();
+        BD.conectar();
+
+        str.append(" UPDATE user");
+        str.append(" set ");
+        str.append(" encrypt_password = ").append("'").append(userDTO.getPassword()).append("'");
+        str.append(" WHERE id =").append(userDTO.getIdUser());
+
+        BD.atualizar(str.toString());
+        BD.close();
+
+        return true;
     }
 
     @Override
     public boolean delete(int idUser) throws Exception {
-
         StringBuilder str = new StringBuilder();
 
         BD.conectar();

@@ -2,6 +2,7 @@ package com.usersnotifications.command.notification;
 
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.repository.NotificationRepository;
+import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.model.Notification;
 
 public class NotificationSendCommand extends NotificationCommand {
@@ -11,9 +12,14 @@ public class NotificationSendCommand extends NotificationCommand {
 
   @Override
   public boolean execute(Notification notification) throws Exception {
-    // if(notification.getToUserId() == null) {
-    // int toUserId = this.userDAO.getUserByName(notification.getToUsername());
-    // notification.setToUserId(toUserId);
+    if(Integer.valueOf(notification.getToUserId()) == null) {
+    UserDTO toUser = this.userDAO.getUserByName(notification.getToUsername());
+    
+    notification.setToUserId(toUser.getIdUser());
+    }
+
+    this.notificationRepository.add(notification);
+
     return true;
   }
 }

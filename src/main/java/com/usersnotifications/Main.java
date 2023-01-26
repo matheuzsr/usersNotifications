@@ -32,7 +32,7 @@ public class Main {
 
             EncryptorPassword encryptorPassword = new EncryptorPassword(dotenv);
 
-            new SignPresenter(userDAO, new MainWindowPresenter(notificationRepository, userDAO, notificationCommand),
+            new SignPresenter(userDAO, new MainWindowPresenter(notificationRepository, userDAO, notificationCommand, encryptorPassword),
                     encryptorPassword);
 
         } catch (Exception ex) {

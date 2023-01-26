@@ -21,7 +21,17 @@ public class NotificationRepositorySQLite implements NotificationRepository {
 
     @Override
     public void add(Notification notification) throws Exception {
-        // TODO: Implementar aqui e chamar no NotificationCommand
+        BD.conectar();
+        StringBuilder str = new StringBuilder();
+
+        str.append("INSERT INTO notification (description, from_user_id, to_user_id, sent_at) VALUES ('");
+        str.append(notification.getDescription()).append("', ");
+        str.append(notification.getFromUserId()).append(", ");
+        str.append(notification.getToUserId()).append(", '");
+        str.append(notification.getSentAt()).append("');");
+
+        BD.atualizar(str.toString());
+        BD.close();
     }
 
     @Override
@@ -30,15 +40,31 @@ public class NotificationRepositorySQLite implements NotificationRepository {
     }
 
     @Override
-    public Collection<Notification> getToAll(int userId) throws Exception {
+    public Collection<Notification> getReceivedAll(int userId) throws Exception {
+        return this.getAll(userId, false);
+    }
+
+    @Override
+    public Collection<Notification> getSentAll(int userId) throws Exception {
+        return this.getAll(userId, true);
+    }
+
+    private Collection<Notification> getAll(int userId, boolean sent) throws Exception {
         List<Notification> notifcationList = new ArrayList<>();
 
         try {
             StringBuilder str = new StringBuilder();
-            str.append("SELECT notification.id, description, user.username as from_username, read_at, sent_at ");
-            str.append("FROM notification ");
-            str.append("JOIN user on notification.from_user_id = user.id ");
-            str.append("WHERE notification.to_user_id = ");
+            str.append(
+                    "SELECT notification.id, description, from_user.username as from_username, to_user.username as to_username, read_at, sent_at FROM notification ");
+            str.append("JOIN user to_user on notification.to_user_id = to_user.id ");
+            str.append("JOIN user from_user on notification.from_user_id = from_user.id ");
+
+            if (sent) {
+                str.append("WHERE notification.from_user_id = ");
+            } else {
+                str.append("WHERE notification.to_user_id = ");
+            }
+
             str.append(userId);
 
             BD.conectar();
@@ -52,6 +78,8 @@ public class NotificationRepositorySQLite implements NotificationRepository {
 
                 Notification notification = new Notification(notificationId, fromUsername, sentAt);
 
+                String toUsername = BD.getRs().getString("to_username");
+                notification.setToUsername(toUsername);
                 String description = BD.getRs().getString("description");
                 notification.setDescription(description);
 
@@ -75,19 +103,19 @@ public class NotificationRepositorySQLite implements NotificationRepository {
 
     @Override
     public boolean read(int notificationId) throws Exception {
-		StringBuilder str = new StringBuilder();
+        StringBuilder str = new StringBuilder();
 
-		BD.conectar();
+        BD.conectar();
 
-		str.append(" UPDATE notification ");
-		str.append(" set ");
-		str.append(" read_at = ").append("'").append(LocalDate.now()).append("'");
-		str.append(" Where id =").append(notificationId);
+        str.append(" UPDATE notification ");
+        str.append(" set ");
+        str.append(" read_at = ").append("'").append(LocalDate.now()).append("'");
+        str.append(" Where id =").append(notificationId);
 
-		BD.atualizar(str.toString());
-		BD.close();
+        BD.atualizar(str.toString());
+        BD.close();
 
-		return true;
+        return true;
     }
 
     @Override
