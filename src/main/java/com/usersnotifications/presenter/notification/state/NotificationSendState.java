@@ -30,6 +30,8 @@ public class NotificationSendState extends NotificationState {
     view.getSendBtn().addActionListener((ActionEvent ae) -> {
       try {
         this.send();
+        JOptionPane.showMessageDialog(null, "Notificação enviada com sucesso!");
+        view.dispose();
       } catch (Exception ex) {
         JOptionPane.showMessageDialog(null, "Não foi possível enviar a notificação");
       }

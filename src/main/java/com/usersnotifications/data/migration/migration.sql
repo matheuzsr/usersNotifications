@@ -8,8 +8,7 @@ actived_at date
 
 CREATE TABLE notification (
 id INTEGER primary key AUTOINCREMENT not null,
-description varchar(100) not null
-created_at date,
+description varchar(100) not null,
 read_at date,
 from_user_id int,
 to_user_id int,

@@ -15,6 +15,7 @@ public class NotificationPresenter {
   private NotificationRepository notificationRepository;
   private UserDAO userDAO;
   private NotificationCommand notificationCommand;
+  private Notification notification;
 
   public NotificationPresenter(NotificationRepository notificationRepository, UserDAO userDAO,
       NotificationCommand notificationCommand, Notification notification) {
@@ -23,6 +24,7 @@ public class NotificationPresenter {
     this.notificationRepository = notificationRepository;
     this.userDAO = userDAO;
     this.notificationCommand = notificationCommand;
+    this.notification = notification;
 
     if (notification == null) {
       this.setState(new NotificationSendState(this));
@@ -61,5 +63,13 @@ public class NotificationPresenter {
 
   public NotificationCommand getNotificationCommand() {
     return notificationCommand;
+  }
+
+  public Notification getNotification() {
+    return notification;
+  }
+
+  public void setNotification(Notification notification) {
+    this.notification = notification;
   }
 }

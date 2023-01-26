@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
+import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.command.notification.NotificationCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.repository.NotificationRepository;
@@ -17,12 +18,14 @@ public class MainWindowPresenter {
     private NotificationRepository notificationRepository;
     private UserDAO userDAO;
     private NotificationCommand notificationCommand;
+    private EncryptorPassword encryptorPassword;
 
     public MainWindowPresenter(NotificationRepository notificationRepository, UserDAO userDAO,
-            NotificationCommand notificationCommand) {
+            NotificationCommand notificationCommand, EncryptorPassword encryptorPassword) {
         this.notificationRepository = notificationRepository;
         this.userDAO = userDAO;
         this.notificationCommand = notificationCommand;
+        this.encryptorPassword = encryptorPassword;
 
         this.view = new MainWindowView();
         this.screenConfiguration();
@@ -46,6 +49,16 @@ public class MainWindowPresenter {
             try {
                 NotificationListPresenter presenter = new NotificationListPresenter(this.notificationRepository,
                         this.userDAO);
+
+                showPanel(presenter.getView(), false, false);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(view, ex.getMessage());
+            }
+        });
+
+        this.view.getChangePassordMenuItem().addActionListener((ActionEvent e) -> {
+            try {
+                ChangePasswordPresenter presenter = new ChangePasswordPresenter(this.userDAO, this.encryptorPassword);
 
                 showPanel(presenter.getView(), false, false);
             } catch (Exception ex) {

@@ -34,7 +34,7 @@ public class NotificationView extends javax.swing.JInternalFrame {
         titleLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descriptionMessageTxtArea = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        toLbl = new javax.swing.JLabel();
         toUserSelect = new javax.swing.JComboBox<>();
         sendBtn = new javax.swing.JButton();
         closeBtn = new javax.swing.JButton();
@@ -46,7 +46,7 @@ public class NotificationView extends javax.swing.JInternalFrame {
         descriptionMessageTxtArea.setRows(5);
         jScrollPane1.setViewportView(descriptionMessageTxtArea);
 
-        jLabel1.setText("Para");
+        toLbl.setText("Para");
 
         sendBtn.setText("Enviar");
 
@@ -68,7 +68,7 @@ public class NotificationView extends javax.swing.JInternalFrame {
                                 .addComponent(titleLbl))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(76, 76, 76)
-                                .addComponent(jLabel1)
+                                .addComponent(toLbl)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(toUserSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 2, Short.MAX_VALUE)))
@@ -87,7 +87,7 @@ public class NotificationView extends javax.swing.JInternalFrame {
                 .addComponent(titleLbl)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(toLbl)
                     .addComponent(toUserSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,13 +121,17 @@ public class NotificationView extends javax.swing.JInternalFrame {
         return toUserSelect;
     }
 
+    public JLabel getToLbl() {
+        return toLbl;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeBtn;
     private javax.swing.JTextArea descriptionMessageTxtArea;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton sendBtn;
     private javax.swing.JLabel titleLbl;
+    private javax.swing.JLabel toLbl;
     private javax.swing.JComboBox<String> toUserSelect;
     // End of variables declaration//GEN-END:variables
 }
