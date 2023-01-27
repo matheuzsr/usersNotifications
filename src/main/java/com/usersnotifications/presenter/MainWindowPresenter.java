@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
+import com.usersnotifications.business.Session;
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.command.notification.NotificationCommand;
 import com.usersnotifications.data.dao.UserDAO;
@@ -65,6 +66,24 @@ public class MainWindowPresenter {
                 JOptionPane.showMessageDialog(view, ex.getMessage());
             }
         });
+
+        this.view.getUsersChangeAuthorizedMenuItem().addActionListener((ActionEvent e) -> {
+            try {
+                UserListPresenter presenter = new UserListPresenter(this.userDAO);
+
+                showPanel(presenter.getView(), false, false);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(view, ex.getMessage());
+            }
+        });
+    }
+
+    // TODO: Como é só uma aba preferi manter só essa config(mas o ideal seria usar
+    // o state caso aumentasse)
+    public void handleShowMenuProducts() {
+        if (!Session.getInstance().getUser().getType().equals("admin")) {
+            this.view.getManagerMenu().setVisible(false);
+        }
     }
 
     public static void showPanel(JInternalFrame frame, Boolean maximize, Boolean closable) throws Exception {
@@ -92,6 +111,7 @@ public class MainWindowPresenter {
     }
 
     public void setVisibleView() {
+        this.handleShowMenuProducts();
         this.view.setVisible(true);
     }
 

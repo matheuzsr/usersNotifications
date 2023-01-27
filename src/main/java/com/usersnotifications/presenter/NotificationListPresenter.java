@@ -26,6 +26,7 @@ public class NotificationListPresenter {
   public NotificationListPresenter(NotificationRepository repository, UserDAO userDAO) throws Exception {
     this.view = new NotificationListView();
     this.repository = repository;
+    this.userDAO = userDAO;
 
     this.screenConfiguration();
   }

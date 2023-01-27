@@ -41,7 +41,7 @@ public class MainWindowView extends javax.swing.JFrame {
         managerAccountMenu = new javax.swing.JMenu();
         changePassordMenuItem = new javax.swing.JMenuItem();
         managerMenu = new javax.swing.JMenu();
-        usersAuthorizedMenuItem = new javax.swing.JMenuItem();
+        usersChangeAuthorizedMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,8 +75,8 @@ public class MainWindowView extends javax.swing.JFrame {
         managerMenu.setMnemonic('h');
         managerMenu.setText("Gestão de usuários");
 
-        usersAuthorizedMenuItem.setText("Autorizar usuários");
-        managerMenu.add(usersAuthorizedMenuItem);
+        usersChangeAuthorizedMenuItem.setText("Autorizar/Alterar usuários");
+        managerMenu.add(usersChangeAuthorizedMenuItem);
 
         menuBar.add(managerMenu);
 
@@ -166,7 +166,7 @@ public class MainWindowView extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu notificationMenu;
     private javax.swing.JMenuItem sendNotificationMenuItem;
-    private javax.swing.JMenuItem usersAuthorizedMenuItem;
+    private javax.swing.JMenuItem usersChangeAuthorizedMenuItem;
     private javax.swing.JMenuItem viewNotificationMenuItem;
     // End of variables declaration//GEN-END:variables
 
@@ -186,12 +186,15 @@ public class MainWindowView extends javax.swing.JFrame {
         return sendNotificationMenuItem;
     }
 
-    public JMenuItem getUsersAuthorizedMenuItem() {
-        return usersAuthorizedMenuItem;
+    public JMenuItem getUsersChangeAuthorizedMenuItem() {
+        return usersChangeAuthorizedMenuItem;
     }
 
     public JMenuItem getViewNotificationMenuItem() {
         return viewNotificationMenuItem;
     }
 
+    public JMenu getManagerMenu() {
+        return managerMenu;
+    }
 }

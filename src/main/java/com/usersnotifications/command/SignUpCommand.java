@@ -19,10 +19,7 @@ public class SignUpCommand extends SignCommand {
 
   @Override
   public boolean execute(UserDTO user) throws Exception {
-    if (type == "admin") {
-      user.setType("admin");
-      user.setActivedAt(LocalDate.now());
-    }
+    this.getTypeUser(user);
 
     String password = user.getPassword();
     String encryptedPassword = this.encryptorPassword.encrypt(password);
@@ -31,5 +28,15 @@ public class SignUpCommand extends SignCommand {
     this.userDAO.add(user);
 
     return true;
+  }
+
+  private void getTypeUser(UserDTO user) {
+    if (type == "admin") {
+      user.setType("admin");
+      user.setActivedAt(LocalDate.now());
+      return;
+    }
+
+    user.setType("user");
   }
 }

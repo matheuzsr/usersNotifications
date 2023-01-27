@@ -10,6 +10,7 @@ public class UserDTO {
     private String passwordConfirm;
     private LocalDate activedAt;
     private String type;
+    private LocalDate createdAt;
 
     public UserDTO(int idUser, String name, String password) {
         this.idUser = idUser;
@@ -54,16 +55,22 @@ public class UserDTO {
         return activedAt;
     }
 
-    public void setActivedAt(LocalDate activedAt) {
+    public UserDTO setActivedAt(LocalDate activedAt) {
         this.activedAt = activedAt;
+
+        return this;
+
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public UserDTO setType(String type) {
         this.type = type;
+
+        return this;
+
     }
 
     public String getPasswordConfirm() {
@@ -76,4 +83,14 @@ public class UserDTO {
         return this;
     }
 
+    public UserDTO setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+
+        return this;
+
+    }
+
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
 }
