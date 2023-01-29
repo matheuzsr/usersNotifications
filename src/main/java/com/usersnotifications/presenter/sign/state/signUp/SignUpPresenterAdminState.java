@@ -5,8 +5,8 @@
 package com.usersnotifications.presenter.sign.state.signUp;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
-import com.usersnotifications.command.SignCommand;
-import com.usersnotifications.command.SignInCommand;
+import com.usersnotifications.command.sign.SignCommand;
+import com.usersnotifications.command.sign.SignInCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.presenter.sign.SignPresenter;
@@ -47,9 +47,7 @@ public class SignUpPresenterAdminState extends SignPresenterState {
     }
 
     @Override
-    public void register() {
-        //TODO: Lembrar de usar a utils do professor para validar a senha
-        
+    public void register() {     
         UserDTO user = this.getFieldsInformation();
         try {
             this.signCommand.execute(user);
@@ -61,9 +59,9 @@ public class SignUpPresenterAdminState extends SignPresenterState {
             this.presenter.setState(new SignInPresenterState(this.presenter, signInCommand));
             
             JOptionPane.showMessageDialog(null, "Usuário admin registrado com sucesso!");
-        } catch (Exception e) {
+        } catch (Exception ex) {
             // TODO: Chamar o logger
-            JOptionPane.showMessageDialog(null, "Não foi possível registrar o admin!");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
 
         }
     }

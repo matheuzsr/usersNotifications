@@ -4,7 +4,7 @@
  */
 package com.usersnotifications.presenter.sign.state;
 
-import com.usersnotifications.command.SignCommand;
+import com.usersnotifications.command.sign.SignCommand;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.presenter.sign.SignPresenter;
 
@@ -45,7 +45,7 @@ public abstract class SignPresenterState {
 	protected UserDTO getFieldsInformation() {
 		String username = this.presenter.getView().getUsernameTxt().getText();
 		String password = this.presenter.getView().getPasswordTxt().getText();
-		String confirmPassword = this.presenter.getView().getPasswordTxt().getText();
+		String confirmPassword = this.presenter.getView().getConfirmPasswordTxt().getText();
 
 		// EncryptorPassword encryptorPassword = this.presenter.getEncryptorPassword();
 		// String passwordEncrypted = encryptorPassword.encrypt(password);

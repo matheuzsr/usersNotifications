@@ -6,9 +6,10 @@ package com.usersnotifications.presenter.sign;
 
 import javax.swing.JOptionPane;
 
+import com.pss.senha.validacao.ValidadorSenha;
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
-import com.usersnotifications.command.SignInCommand;
-import com.usersnotifications.command.SignUpCommand;
+import com.usersnotifications.command.sign.SignInCommand;
+import com.usersnotifications.command.sign.SignUpCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.presenter.MainWindowPresenter;
 import com.usersnotifications.presenter.sign.state.SignPresenterState;
@@ -27,15 +28,18 @@ public class SignPresenter {
     protected EncryptorPassword encryptorPassword;
     protected UserDAO userDAO;
     private SignPresenterState state;
+    public ValidadorSenha validadorSenha;
 
     public SignPresenter(
             UserDAO userDAO,
             MainWindowPresenter mainWindowPresenter,
-            EncryptorPassword encryptorPassword) {
+            EncryptorPassword encryptorPassword,
+            ValidadorSenha validadorSenha) {
         this.mainWindowPresenter = mainWindowPresenter;
         this.view = new SignView();
         this.encryptorPassword = encryptorPassword;
         this.userDAO = userDAO;
+        this.validadorSenha = validadorSenha;
 
         this.handleOpenState();
     }
@@ -68,9 +72,11 @@ public class SignPresenter {
         try {
             Boolean dontHaveUserRegistered = this.getUserDAO().getAll().isEmpty();
 
+            // TODO: Passar os commands por injeção de dependência
             if (dontHaveUserRegistered) {
                 this.setState(new SignUpPresenterAdminState(this,
-                        new SignUpCommand(this.getUserDAO(), this.getEncryptorPassword(), "admin")));
+                        new SignUpCommand(this.getUserDAO(), this.getEncryptorPassword(), this.validadorSenha,
+                                "admin")));
             } else {
                 this.setState(new SignInPresenterState(this,
                         new SignInCommand(this.getUserDAO(), this.getEncryptorPassword())));

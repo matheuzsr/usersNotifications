@@ -5,9 +5,9 @@
 package com.usersnotifications.presenter.sign.state.signUp;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
-import com.usersnotifications.command.SignCommand;
-import com.usersnotifications.command.SignInCommand;
-import com.usersnotifications.command.SignUpCommand;
+import com.usersnotifications.command.sign.SignCommand;
+import com.usersnotifications.command.sign.SignInCommand;
+import com.usersnotifications.command.sign.SignUpCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.presenter.sign.SignPresenter;
@@ -35,7 +35,7 @@ public class SignUpPresenterState extends SignPresenterState {
         view.setVisible(false);
         view.getTitleLbl().setText("Cadastre e torne-se um usuário");
 
-        view.getConfirmPasswordConfirmTxt().setVisible(true);
+        view.getConfirmPasswordTxt().setVisible(true);
         view.getPasswordConfirmLabel().setVisible(true);
 
         this.presenter.getView().getLoginBtn().setText("Cadastrar");

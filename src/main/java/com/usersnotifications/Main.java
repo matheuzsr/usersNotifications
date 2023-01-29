@@ -3,6 +3,7 @@
  */
 package com.usersnotifications;
 
+import com.pss.senha.validacao.ValidadorSenha;
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.command.notification.NotificationCommand;
 import com.usersnotifications.command.notification.NotificationSendCommand;
@@ -24,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-
+            new ValidadorSenha();
             Dotenv dotenv = Dotenv.configure().load();
             UserDAO userDAO = new UserDAOSQLite();
             NotificationRepository notificationRepository = new NotificationRepositorySQLite();
@@ -32,8 +33,9 @@ public class Main {
 
             EncryptorPassword encryptorPassword = new EncryptorPassword(dotenv);
 
-            new SignPresenter(userDAO, new MainWindowPresenter(notificationRepository, userDAO, notificationCommand, encryptorPassword),
-                    encryptorPassword);
+            new SignPresenter(userDAO,
+                    new MainWindowPresenter(notificationRepository, userDAO, notificationCommand, encryptorPassword),
+                    encryptorPassword, new ValidadorSenha());
 
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
