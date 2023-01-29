@@ -115,7 +115,7 @@
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="userTypeLbl" min="-2" pref="117" max="-2" attributes="0"/>
-                      <EmptySpace pref="730" max="32767" attributes="0"/>
+                      <EmptySpace pref="667" max="32767" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="notificationTotalLbl" min="-2" pref="23" max="-2" attributes="0"/>
@@ -155,7 +155,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Total de notifica&#xe7;&#xf5;es: "/>
+                <Property name="text" type="java.lang.String" value="Total de notifica&#xe7;&#xf5;es recebidas: "/>
               </Properties>
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Total notifica&#xe7;&#xf5;es: "/>
