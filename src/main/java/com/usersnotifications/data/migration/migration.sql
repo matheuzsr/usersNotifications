@@ -2,8 +2,10 @@ CREATE TABLE user (
 id INTEGER primary key AUTOINCREMENT not null,
 username varchar(100) not null,
 encrypt_password varchar(100) not null,
-type varchar(100) not null,
-actived_at date
+type varchar(100),
+actived_at date,
+deleted_at date,
+created_at date
 );
 
 CREATE TABLE notification (

@@ -19,9 +19,17 @@ public class SignUpCommand extends SignCommand {
 
   @Override
   public boolean execute(UserDTO user) throws Exception {
+    UserDTO existUser = this.userDAO.getUserByName(user.getName());
+
+    if (existUser != null) {
+      throw new Exception("Nome de usuário já existe!");
+    }
+
     if (type == "admin") {
       user.setType("admin");
       user.setActivedAt(LocalDate.now());
+    } else {
+      user.setType("user");
     }
 
     String password = user.getPassword();

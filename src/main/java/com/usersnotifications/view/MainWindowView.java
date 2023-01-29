@@ -5,6 +5,7 @@
 package com.usersnotifications.view;
 
 import javax.swing.JDesktopPane;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -34,6 +35,13 @@ public class MainWindowView extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        notificationTotalLbl = new javax.swing.JLabel();
+        usernameLbl = new javax.swing.JLabel();
+        userTypeLbl = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         notificationMenu = new javax.swing.JMenu();
         sendNotificationMenuItem = new javax.swing.JMenuItem();
@@ -41,9 +49,54 @@ public class MainWindowView extends javax.swing.JFrame {
         managerAccountMenu = new javax.swing.JMenu();
         changePassordMenuItem = new javax.swing.JMenuItem();
         managerMenu = new javax.swing.JMenu();
-        usersAuthorizedMenuItem = new javax.swing.JMenuItem();
+        usersChangeAuthorizedMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel3.setText("Username:");
+
+        jLabel5.setText("Tipo:");
+
+        jLabel2.setText("Total de notificações: ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usernameLbl)
+                .addGap(54, 54, 54)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userTypeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 730, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(notificationTotalLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userTypeLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(notificationTotalLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel5)
+                        .addComponent(usernameLbl)))
+                .addContainerGap())
+        );
+
+        jLabel2.getAccessibleContext().setAccessibleName("Total notificações: ");
+
+        desktopPane.add(jPanel1);
+        jPanel1.setBounds(0, 780, 1200, 40);
 
         notificationMenu.setMnemonic('e');
         notificationMenu.setText("Notificações");
@@ -75,8 +128,8 @@ public class MainWindowView extends javax.swing.JFrame {
         managerMenu.setMnemonic('h');
         managerMenu.setText("Gestão de usuários");
 
-        usersAuthorizedMenuItem.setText("Autorizar usuários");
-        managerMenu.add(usersAuthorizedMenuItem);
+        usersChangeAuthorizedMenuItem.setText("Autorizar usuários");
+        managerMenu.add(usersChangeAuthorizedMenuItem);
 
         menuBar.add(managerMenu);
 
@@ -161,12 +214,19 @@ public class MainWindowView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem changePassordMenuItem;
     private static javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu managerAccountMenu;
     private javax.swing.JMenu managerMenu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu notificationMenu;
+    private javax.swing.JLabel notificationTotalLbl;
     private javax.swing.JMenuItem sendNotificationMenuItem;
-    private javax.swing.JMenuItem usersAuthorizedMenuItem;
+    private javax.swing.JLabel userTypeLbl;
+    private javax.swing.JLabel usernameLbl;
+    private javax.swing.JMenuItem usersChangeAuthorizedMenuItem;
     private javax.swing.JMenuItem viewNotificationMenuItem;
     // End of variables declaration//GEN-END:variables
 
@@ -186,12 +246,28 @@ public class MainWindowView extends javax.swing.JFrame {
         return sendNotificationMenuItem;
     }
 
-    public JMenuItem getUsersAuthorizedMenuItem() {
-        return usersAuthorizedMenuItem;
+    public JMenuItem getUsersChangeAuthorizedMenuItem() {
+        return usersChangeAuthorizedMenuItem;
     }
 
     public JMenuItem getViewNotificationMenuItem() {
         return viewNotificationMenuItem;
+    }
+
+    public JMenu getManagerMenu() {
+        return managerMenu;
+    }
+
+    public JLabel getNotificationTotalLbl() {
+        return notificationTotalLbl;
+    }
+
+    public JLabel getUserTypeLbl() {
+        return userTypeLbl;
+    }
+
+    public JLabel getUsernameLbl() {
+        return usernameLbl;
     }
 
 }

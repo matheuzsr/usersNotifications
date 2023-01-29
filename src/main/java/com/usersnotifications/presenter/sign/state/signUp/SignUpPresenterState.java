@@ -72,9 +72,9 @@ public class SignUpPresenterState extends SignPresenterState {
             this.presenter.setState(new SignInPresenterState(this.presenter, signInCommand));
             JOptionPane.showMessageDialog(null, "Usuário registrado com sucesso!");
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
             // TODO: Chamar o logger
-            JOptionPane.showMessageDialog(null, "Não foi possível registrar o usuário!");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 }

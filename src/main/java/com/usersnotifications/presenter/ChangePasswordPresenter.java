@@ -28,7 +28,9 @@ public class ChangePasswordPresenter {
       this.handleChangePassword();
     });
 
-    this.view.dispose();
+    this.view.getCloseBtn().addActionListener((ActionEvent ae) -> {
+      this.view.dispose();
+    });
   }
 
   private void handleChangePassword() {

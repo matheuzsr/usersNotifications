@@ -1,16 +1,16 @@
 package com.usersnotifications.presenter;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
-
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
+import com.usersnotifications.business.Session;
 import com.usersnotifications.command.notification.NotificationCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.repository.NotificationRepository;
+import com.usersnotifications.model.User;
 import com.usersnotifications.presenter.notification.NotificationPresenter;
 import com.usersnotifications.view.MainWindowView;
+import java.awt.event.ActionEvent;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 public class MainWindowPresenter {
 
@@ -65,6 +65,25 @@ public class MainWindowPresenter {
                 JOptionPane.showMessageDialog(view, ex.getMessage());
             }
         });
+
+        this.view.getUsersChangeAuthorizedMenuItem().addActionListener((ActionEvent e) -> {
+            try {
+                UserListPresenter presenter = new UserListPresenter(this.userDAO);
+
+                showPanel(presenter.getView(), false, false);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(view, ex.getMessage());
+            }
+        });
+    }
+
+    // TODO: Como é só uma aba preferi manter só essa config(mas o ideal seria usar
+    // o state caso aumentasse)
+    public void handleShowMenuProducts() {
+        if (!Session.getInstance().getUser().getType().equals("admin")) {
+            this.view.getManagerMenu().setVisible(false);
+            this.view.getSendNotificationMenuItem().setVisible(false);
+        }
     }
 
     public static void showPanel(JInternalFrame frame, Boolean maximize, Boolean closable) throws Exception {
@@ -92,7 +111,24 @@ public class MainWindowPresenter {
     }
 
     public void setVisibleView() {
+        this.handleShowMenuProducts();
+        this.handleUserInformation();
+
         this.view.setVisible(true);
     }
 
+    private void handleUserInformation() {
+        User user = Session.getInstance().getUser();
+        this.view.getUsernameLbl().setText(user.getName());
+        this.view.getUserTypeLbl().setText(user.getType());
+
+        int total;
+        try {
+            total = this.notificationRepository.getReceivedAll(user.getIdUser()).size();
+            this.view.getNotificationTotalLbl().setText(String.valueOf(total));
+
+        } catch (Exception e) {
+            this.view.getNotificationTotalLbl().setText("");
+        }
+    }
 }
