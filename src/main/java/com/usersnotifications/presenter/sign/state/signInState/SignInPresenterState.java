@@ -57,9 +57,8 @@ public class SignInPresenterState extends SignPresenterState {
 
     @Override
     public void login() {
-        // TODO: Lembrar de usar a utils do professor para validar a senha
-
         UserDTO user = this.getFieldsInformation();
+        
         try {
             boolean isSigned = this.signCommand.execute(user);
 
@@ -70,7 +69,7 @@ public class SignInPresenterState extends SignPresenterState {
 
         } catch (Exception ex) {
             // TODO: Chamar log aqui
-            JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
 
         }
     }

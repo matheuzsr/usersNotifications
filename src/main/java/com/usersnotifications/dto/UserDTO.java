@@ -9,6 +9,7 @@ public class UserDTO {
     private String password;
     private String passwordConfirm;
     private LocalDate activedAt;
+    private LocalDate createdAt;
     private String type;
 
     public UserDTO(int idUser, String name, String password) {
@@ -76,4 +77,13 @@ public class UserDTO {
         return this;
     }
 
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public UserDTO setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+
+        return this;
+    }
 }
