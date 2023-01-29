@@ -41,7 +41,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="usernameTxt" pref="244" max="32767" attributes="0"/>
                           <Component id="passwordTxt" max="32767" attributes="0"/>
-                          <Component id="confirmPasswordConfirmTxt" alignment="1" max="32767" attributes="0"/>
+                          <Component id="confirmPasswordTxt" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="loginBtn" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -71,7 +71,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="confirmPasswordConfirmTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="confirmPasswordTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="passwordConfirmLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -126,7 +126,7 @@
         <Property name="text" type="java.lang.String" value="Se ainda n&#xe3;o &#xe9; usu&#xe1;rio."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="confirmPasswordConfirmTxt">
+    <Component class="javax.swing.JTextField" name="confirmPasswordTxt">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Test"/>
       </Properties>

@@ -1,4 +1,4 @@
-package com.usersnotifications.command;
+package com.usersnotifications.command.sign;
 
 import java.time.LocalDate;
 
@@ -11,7 +11,7 @@ import com.usersnotifications.model.User;
 public class SignInCommand extends SignCommand {
 
   public SignInCommand(UserDAO userDAO, EncryptorPassword encryptorPassword) {
-    super(userDAO, encryptorPassword);
+    super(userDAO, encryptorPassword, null);
   }
 
   @Override

@@ -28,5 +28,22 @@
             <artifactId>jasypt</artifactId>
             <version>1.9.3</version>
         </dependency>
+    
+    <dependency>
+	    <groupId>com.github.matheuzsr</groupId>
+	    <artifactId>LogRegistroAdapter</artifactId>
+	    <version>1.0</version>
+	</dependency>
+    <dependency>
+        <groupId>com.github.claytonfraga</groupId>
+        <artifactId>validadorsenha</artifactId>
+        <version>master-2acdc79088-1</version>
+    </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 </project>

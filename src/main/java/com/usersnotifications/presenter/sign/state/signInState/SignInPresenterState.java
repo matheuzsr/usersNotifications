@@ -5,8 +5,8 @@
 package com.usersnotifications.presenter.sign.state.signInState;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
-import com.usersnotifications.command.SignCommand;
-import com.usersnotifications.command.SignUpCommand;
+import com.usersnotifications.command.sign.SignCommand;
+import com.usersnotifications.command.sign.SignUpCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.presenter.sign.SignPresenter;
@@ -34,7 +34,7 @@ public class SignInPresenterState extends SignPresenterState {
         view.getTitleLbl().setText("Digite o login e senha para entrar");
 
         view.getPasswordConfirmLabel().setVisible(false);
-        view.getConfirmPasswordConfirmTxt().setVisible(false);
+        view.getConfirmPasswordTxt().setVisible(false);
         view.getLoginBtn().setText("Entrar");
 
         view.getRegisterLbl().setText("Se ainda não é usuário.");
@@ -43,7 +43,8 @@ public class SignInPresenterState extends SignPresenterState {
         view.getClickHereRegisterBtn().addActionListener((ActionEvent ae) -> {
             UserDAO userDAO = this.presenter.getUserDAO();
             EncryptorPassword encryptorPassword = this.presenter.getEncryptorPassword();
-            SignUpCommand signUpCommand = new SignUpCommand(userDAO, encryptorPassword, null);
+            SignUpCommand signUpCommand = new SignUpCommand(userDAO, encryptorPassword, this.presenter.validadorSenha,
+                    null);
 
             this.presenter.setState(new SignUpPresenterState(this.presenter, signUpCommand));
         });
@@ -58,7 +59,7 @@ public class SignInPresenterState extends SignPresenterState {
     @Override
     public void login() {
         UserDTO user = this.getFieldsInformation();
-        
+
         try {
             boolean isSigned = this.signCommand.execute(user);
 

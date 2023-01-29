@@ -50,6 +50,8 @@ public class MainWindowView extends javax.swing.JFrame {
         changePassordMenuItem = new javax.swing.JMenuItem();
         managerMenu = new javax.swing.JMenu();
         usersChangeAuthorizedMenuItem = new javax.swing.JMenuItem();
+        configurationMenu = new javax.swing.JMenu();
+        logConfigurationMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,6 +135,19 @@ public class MainWindowView extends javax.swing.JFrame {
 
         menuBar.add(managerMenu);
 
+        configurationMenu.setMnemonic('h');
+        configurationMenu.setText("Configuração");
+
+        logConfigurationMenuItem.setText("Configurar Log");
+        logConfigurationMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logConfigurationMenuItemActionPerformed(evt);
+            }
+        });
+        configurationMenu.add(logConfigurationMenuItem);
+
+        menuBar.add(configurationMenu);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,6 +163,10 @@ public class MainWindowView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logConfigurationMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logConfigurationMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logConfigurationMenuItemActionPerformed
 
     private void sendNotificationMenuItemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_sendNotificationMenuItemActionPerformed
         // TODO add your handling code here:
@@ -213,11 +232,13 @@ public class MainWindowView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem changePassordMenuItem;
+    private javax.swing.JMenu configurationMenu;
     private static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem logConfigurationMenuItem;
     private javax.swing.JMenu managerAccountMenu;
     private javax.swing.JMenu managerMenu;
     private javax.swing.JMenuBar menuBar;
