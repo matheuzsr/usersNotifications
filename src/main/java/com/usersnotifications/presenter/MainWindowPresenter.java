@@ -5,14 +5,16 @@ import com.usersnotifications.business.Session;
 import com.usersnotifications.command.notification.NotificationCommand;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.repository.NotificationRepository;
+import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.model.User;
+import com.usersnotifications.observer.user.CurrentUserObserver;
 import com.usersnotifications.presenter.notification.NotificationPresenter;
 import com.usersnotifications.view.MainWindowView;
 import java.awt.event.ActionEvent;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
-public class MainWindowPresenter {
+public class MainWindowPresenter implements CurrentUserObserver {
 
     private MainWindowView view;
     private NotificationRepository notificationRepository;
@@ -75,6 +77,16 @@ public class MainWindowPresenter {
                 JOptionPane.showMessageDialog(view, ex.getMessage());
             }
         });
+
+        this.view.getLogConfigurationMenuItem().addActionListener((ActionEvent e) -> {
+            try {
+                LogsPresenter presenter = new LogsPresenter();
+
+                showPanel(presenter.getView(), false, false);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(view, ex.getMessage());
+            }
+        });
     }
 
     // TODO: Como é só uma aba preferi manter só essa config(mas o ideal seria usar
@@ -130,5 +142,10 @@ public class MainWindowPresenter {
         } catch (Exception e) {
             this.view.getNotificationTotalLbl().setText("");
         }
+    }
+
+    @Override
+    public void update(UserDTO user) {
+        this.view.getUsernameLbl().setText(user.getName());
     }
 }

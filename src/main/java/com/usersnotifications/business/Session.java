@@ -1,8 +1,10 @@
 package com.usersnotifications.business;
 
+import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.model.User;
+import com.usersnotifications.observer.user.CurrentUserObserver;
 
-public class Session {
+public class Session implements CurrentUserObserver {
   private static Session instance;
   private User user;
 
@@ -21,5 +23,10 @@ public class Session {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  @Override
+  public void update(UserDTO user) {
+   this.user.setName(user.getName());
   }
 }
