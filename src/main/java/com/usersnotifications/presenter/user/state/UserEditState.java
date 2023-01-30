@@ -5,11 +5,14 @@ import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 
+import com.usersnotifications.business.Session;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.presenter.user.UserPresenter;
+import com.usersnotifications.utils.LoggerService;
 import com.usersnotifications.view.UserView;
 
 public class UserEditState extends UserState {
+  private boolean hasChangedAuthorizedUser;
 
   public UserEditState(UserPresenter presenter, UserDTO userDTO) {
     super(presenter, userDTO);
@@ -52,7 +55,9 @@ public class UserEditState extends UserState {
 
     if (enabledAuthorized) {
       authorizDate = LocalDate.now();
+      this.hasChangedAuthorizedUser = true;
     }
+
     this.userDTO.setActivedAt(authorizDate);
   }
 
@@ -61,6 +66,16 @@ public class UserEditState extends UserState {
     try {
       this.presenter.getUserDAO().update(this.userDTO);
       JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
+
+      LoggerService.getInstance().write(LoggerService.CHANGE,
+          "Houve uma alteração nos dados do usuário " + this.userDTO.getName(),
+          Session.getInstance().getUser().getName());
+
+      if (this.hasChangedAuthorizedUser) {
+        LoggerService.getInstance().write(LoggerService.CHANGE,
+            "Foi realizada a AUTORIZAÇÃO do usuário " + this.userDTO.getName(),
+            Session.getInstance().getUser().getName());
+      }
 
       this.closeView();
     } catch (Exception e) {

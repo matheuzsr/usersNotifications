@@ -6,9 +6,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.pss.senha.validacao.ValidadorSenha;
+import com.usersnotifications.business.Session;
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
+import com.usersnotifications.utils.LoggerService;
 
 public class SignUpCommand extends SignCommand {
 
@@ -26,7 +28,7 @@ public class SignUpCommand extends SignCommand {
       throw new Exception("Nome de usuário não pode ser vazio!");
     }
 
-    if(!user.getPassword().equals(user.getPasswordConfirm())) {
+    if (!user.getPassword().equals(user.getPasswordConfirm())) {
       throw new Exception("As senhas precisam ser iguais!");
     }
 
@@ -49,6 +51,9 @@ public class SignUpCommand extends SignCommand {
     }
 
     this.userDAO.add(user);
+
+    LoggerService.getInstance().write(LoggerService.INCLUDE,
+        "Criação do usuário " + user.getName(), "");
 
     return true;
   }

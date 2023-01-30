@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 public class NotificationRepositorySQLite implements NotificationRepository {
     private final SQLiteDB BD = new SQLiteDB();
-
+    
     @Override
     public void add(Notification notification) throws Exception {
         BD.conectar();
