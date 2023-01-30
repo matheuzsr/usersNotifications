@@ -130,7 +130,7 @@ public class MainWindowView extends javax.swing.JFrame {
         managerMenu.setMnemonic('h');
         managerMenu.setText("Gestão de usuários");
 
-        usersChangeAuthorizedMenuItem.setText("Autorizar usuários");
+        usersChangeAuthorizedMenuItem.setText("Alterar/Autorizar usuários");
         managerMenu.add(usersChangeAuthorizedMenuItem);
 
         menuBar.add(managerMenu);
@@ -289,6 +289,10 @@ public class MainWindowView extends javax.swing.JFrame {
 
     public JLabel getUsernameLbl() {
         return usernameLbl;
+    }
+
+    public JMenuItem getLogConfigurationMenuItem() {
+        return logConfigurationMenuItem;
     }
 
 }

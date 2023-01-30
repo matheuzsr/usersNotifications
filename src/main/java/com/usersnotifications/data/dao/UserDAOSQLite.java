@@ -4,13 +4,15 @@ import com.usersnotifications.business.Session;
 import com.usersnotifications.data.connection.SQLiteDB;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.model.User;
+import com.usersnotifications.observer.user.UserObservable;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class UserDAOSQLite implements UserDAO {
+public class UserDAOSQLite extends UserObservable implements UserDAO {
 
     private final SQLiteDB BD = SQLiteDB.getInstance();
 
@@ -205,6 +207,8 @@ public class UserDAOSQLite implements UserDAO {
         BD.atualizar(str.toString());
         BD.close();
 
+        this.notifyObservers(this.getById(userDTO.getIdUser()));
+
         return true;
     }
 
@@ -241,5 +245,12 @@ public class UserDAOSQLite implements UserDAO {
         BD.close();
 
         return true;
+    }
+
+    @Override
+    protected void notifyObservers(UserDTO user) {
+        this.observerList.forEach(observer -> {
+            observer.update(user);
+        });
     }
 }

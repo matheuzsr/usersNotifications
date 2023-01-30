@@ -64,6 +64,8 @@ public class UserEditState extends UserState {
   @Override
   public void save() {
     try {
+      this.userDTO.setName(this.presenter.getView().getUserNameTxt().getText());
+      
       this.presenter.getUserDAO().update(this.userDTO);
       JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso!");
 
