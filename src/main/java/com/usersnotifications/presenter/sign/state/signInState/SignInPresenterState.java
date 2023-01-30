@@ -69,9 +69,7 @@ public class SignInPresenterState extends SignPresenterState {
             }
 
         } catch (Exception ex) {
-            // TODO: Chamar log aqui
             JOptionPane.showMessageDialog(null, ex.getMessage());
-
         }
     }
 }

@@ -59,8 +59,6 @@ public class SignUpPresenterState extends SignPresenterState {
 
     @Override
     public void register() {
-        // TODO: Lembrar de usar a utils do professor para validar a senha
-
         UserDTO user = this.getFieldsInformation();
         try {
             this.signCommand.execute(user);
@@ -73,7 +71,6 @@ public class SignUpPresenterState extends SignPresenterState {
             JOptionPane.showMessageDialog(null, "Usuário registrado com sucesso!");
 
         } catch (Exception ex) {
-            // TODO: Chamar o logger
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }

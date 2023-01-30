@@ -60,9 +60,7 @@ public class SignUpPresenterAdminState extends SignPresenterState {
             
             JOptionPane.showMessageDialog(null, "Usuário admin registrado com sucesso!");
         } catch (Exception ex) {
-            // TODO: Chamar o logger
             JOptionPane.showMessageDialog(null, ex.getMessage());
-
         }
     }
 }
