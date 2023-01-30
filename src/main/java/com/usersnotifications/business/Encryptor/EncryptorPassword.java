@@ -5,7 +5,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class EncryptorPassword {
-  // TODO: Criar aqui um adapter
+  // TODO: Poderia ser um adapter
   private BasicTextEncryptor encryptor;
 
   public EncryptorPassword(Dotenv dotenv) {
