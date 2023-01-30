@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 import com.usersnotifications.model.Notification;
 import com.usersnotifications.presenter.notification.NotificationPresenter;
+import com.usersnotifications.utils.LoggerService;
 import com.usersnotifications.view.NotificationListView;
 import com.usersnotifications.business.Session;
 import com.usersnotifications.data.dao.UserDAO;
@@ -103,6 +104,9 @@ public class NotificationListPresenter {
 
     try {
       if (this.repository.read(notificationId)) {
+        LoggerService.getInstance().write(LoggerService.READING_NOTIFICATION, "Id notificação lida: " + notificationId,
+            Session.getInstance().getUser().getName());
+
         NotificationPresenter presenter = new NotificationPresenter(this.repository, this.userDAO, null, notification);
 
         MainWindowPresenter.showPanel(presenter.getView(), false, false);

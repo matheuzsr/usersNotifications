@@ -22,12 +22,11 @@ import java.util.logging.Logger;
  * @author logcomex
  */
 public class Main {
-
     public static void main(String[] args) {
         try {
-            new ValidadorSenha();
             Dotenv dotenv = Dotenv.configure().load();
             UserDAO userDAO = new UserDAOSQLite();
+
             NotificationRepository notificationRepository = new NotificationRepositorySQLite();
             NotificationCommand notificationCommand = new NotificationSendCommand(notificationRepository, userDAO);
 

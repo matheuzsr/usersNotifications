@@ -8,6 +8,7 @@ import com.usersnotifications.business.Session;
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
+import com.usersnotifications.utils.LoggerService;
 import com.usersnotifications.view.ChangePasswordView;
 
 public class ChangePasswordPresenter {
@@ -47,6 +48,9 @@ public class ChangePasswordPresenter {
           && this.handleValidadeCurrentPassword(currentPasswordTxt, user.getPassword())) {
         user.setPassword(this.encryptorPassword.encrypt(newPasswordTxt));
         this.userDAO.updatePassword(user);
+
+        LoggerService.getInstance().write(LoggerService.CHANGE, "Alteração de senha do usuário ",
+            Session.getInstance().getUser().getName());
 
         JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!");
         this.view.dispose();
