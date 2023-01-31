@@ -1,6 +1,7 @@
 package com.usersnotifications.presenter;
 
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
+import com.pss.senha.validacao.ValidadorSenha;
 import com.usersnotifications.business.Session;
 import com.usersnotifications.command.notification.NotificationCommand;
 import com.usersnotifications.data.dao.UserDAO;
@@ -21,13 +22,15 @@ public class MainWindowPresenter implements CurrentUserObserver {
     private UserDAO userDAO;
     private NotificationCommand notificationCommand;
     private EncryptorPassword encryptorPassword;
+    private ValidadorSenha validatorPassword;
 
     public MainWindowPresenter(NotificationRepositorySQLite notificationRepository, UserDAO userDAO,
-            NotificationCommand notificationCommand, EncryptorPassword encryptorPassword) {
+            NotificationCommand notificationCommand, EncryptorPassword encryptorPassword, ValidadorSenha validatorPassword) {
         this.notificationRepository = notificationRepository;
         this.userDAO = userDAO;
         this.notificationCommand = notificationCommand;
         this.encryptorPassword = encryptorPassword;
+        this.validatorPassword = validatorPassword;
 
         this.view = new MainWindowView();
         this.screenConfiguration();
@@ -62,7 +65,7 @@ public class MainWindowPresenter implements CurrentUserObserver {
 
         this.view.getChangePassordMenuItem().addActionListener((ActionEvent e) -> {
             try {
-                ChangePasswordPresenter presenter = new ChangePasswordPresenter(this.userDAO, this.encryptorPassword);
+                ChangePasswordPresenter presenter = new ChangePasswordPresenter(this.userDAO, this.encryptorPassword, this.validatorPassword);
 
                 showPanel(presenter.getView(), false, false);
             } catch (Exception ex) {
