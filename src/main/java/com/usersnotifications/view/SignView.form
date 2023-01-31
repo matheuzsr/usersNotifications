@@ -26,6 +26,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="titleLbl" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="registerLbl" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -40,15 +41,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="usernameTxt" pref="244" max="32767" attributes="0"/>
-                          <Component id="passwordTxt" max="32767" attributes="0"/>
-                          <Component id="confirmPasswordTxt" alignment="1" max="32767" attributes="0"/>
+                          <Component id="passwordTxt" alignment="0" max="32767" attributes="0"/>
+                          <Component id="confirmPasswordTxt" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="loginBtn" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="titleLbl" min="-2" max="-2" attributes="0"/>
-                  </Group>
               </Group>
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
           </Group>
@@ -71,8 +68,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="confirmPasswordTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="passwordConfirmLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="confirmPasswordTxt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -96,11 +93,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Senha"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="passwordTxt">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordTxtActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="usernameTxt">
       <Events>
@@ -126,11 +118,6 @@
         <Property name="text" type="java.lang.String" value="Se ainda n&#xe3;o &#xe9; usu&#xe1;rio."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="confirmPasswordTxt">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Test"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="passwordConfirmLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirme senha"/>
@@ -140,6 +127,10 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastre-se aqui"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="passwordTxt">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="confirmPasswordTxt">
     </Component>
   </SubComponents>
 </Form>

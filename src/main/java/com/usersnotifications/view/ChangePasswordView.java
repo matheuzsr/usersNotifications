@@ -32,40 +32,22 @@ public class ChangePasswordView extends javax.swing.JInternalFrame {
 
         titleLbl = new javax.swing.JLabel();
         usernameLbl = new javax.swing.JLabel();
-        currentPasswordTxt = new javax.swing.JTextField();
         passwordLbl = new javax.swing.JLabel();
-        newPasswordTxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        confirmNewPasswordTxt = new javax.swing.JTextField();
         changePasswordBtn = new javax.swing.JButton();
         closeBtn = new javax.swing.JToggleButton();
+        currentPasswordTxt = new javax.swing.JPasswordField();
+        newPasswordTxt = new javax.swing.JPasswordField();
+        confirmNewPasswordTxt = new javax.swing.JPasswordField();
 
         titleLbl.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         titleLbl.setText("Alteração de Senha");
 
         usernameLbl.setText("Senha atual");
 
-        currentPasswordTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                currentPasswordTxtActionPerformed(evt);
-            }
-        });
-
         passwordLbl.setText("Senha nova");
 
-        newPasswordTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newPasswordTxtActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Confirmar senha");
-
-        confirmNewPasswordTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmNewPasswordTxtActionPerformed(evt);
-            }
-        });
 
         changePasswordBtn.setText("Alterar");
 
@@ -89,9 +71,9 @@ public class ChangePasswordView extends javax.swing.JInternalFrame {
                     .addComponent(passwordLbl, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(confirmNewPasswordTxt)
-                    .addComponent(newPasswordTxt)
-                    .addComponent(currentPasswordTxt))
+                    .addComponent(currentPasswordTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newPasswordTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(confirmNewPasswordTxt, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(60, 60, 60))
             .addGroup(layout.createSequentialGroup()
                 .addGap(108, 108, 108)
@@ -109,13 +91,13 @@ public class ChangePasswordView extends javax.swing.JInternalFrame {
                     .addComponent(currentPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLbl))
+                    .addComponent(passwordLbl)
+                    .addComponent(newPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(confirmNewPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(changePasswordBtn)
                     .addComponent(closeBtn))
@@ -124,18 +106,6 @@ public class ChangePasswordView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void currentPasswordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentPasswordTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_currentPasswordTxtActionPerformed
-
-    private void newPasswordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPasswordTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newPasswordTxtActionPerformed
-
-    private void confirmNewPasswordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmNewPasswordTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmNewPasswordTxtActionPerformed
 
     public JButton getChangePasswordBtn() {
         return changePasswordBtn;
@@ -160,10 +130,10 @@ public class ChangePasswordView extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton changePasswordBtn;
     private javax.swing.JToggleButton closeBtn;
-    private javax.swing.JTextField confirmNewPasswordTxt;
-    private javax.swing.JTextField currentPasswordTxt;
+    private javax.swing.JPasswordField confirmNewPasswordTxt;
+    private javax.swing.JPasswordField currentPasswordTxt;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField newPasswordTxt;
+    private javax.swing.JPasswordField newPasswordTxt;
     private javax.swing.JLabel passwordLbl;
     private javax.swing.JLabel titleLbl;
     private javax.swing.JLabel usernameLbl;
