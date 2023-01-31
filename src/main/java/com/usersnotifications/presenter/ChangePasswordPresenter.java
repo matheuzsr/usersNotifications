@@ -1,13 +1,16 @@
 package com.usersnotifications.presenter;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.pss.senha.validacao.ValidadorSenha;
 import com.usersnotifications.business.Session;
 import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.dto.UserDTO;
+import com.usersnotifications.utils.ArrayToString;
 import com.usersnotifications.utils.LoggerService;
 import com.usersnotifications.view.ChangePasswordView;
 
@@ -15,11 +18,14 @@ public class ChangePasswordPresenter {
   private ChangePasswordView view;
   private UserDAO userDAO;
   private EncryptorPassword encryptorPassword;
+  private ValidadorSenha validatorPassword;
 
-  public ChangePasswordPresenter(UserDAO userDAO, EncryptorPassword encryptorPassword) throws Exception {
+  public ChangePasswordPresenter(UserDAO userDAO, EncryptorPassword encryptorPassword, ValidadorSenha validatorPassword)
+      throws Exception {
     this.view = new ChangePasswordView();
     this.userDAO = userDAO;
     this.encryptorPassword = encryptorPassword;
+    this.validatorPassword = validatorPassword;
 
     this.screenConfiguration();
   }
@@ -69,6 +75,11 @@ public class ChangePasswordPresenter {
       throw new Exception("A senha nova e a confirmação iguais devem ser iguais!");
     }
 
+    List<String> validateList = this.validatorPassword.validar(newPassword);
+    if (!validateList.isEmpty()) {
+      throw new Exception(ArrayToString.convert(validateList.toString()));
+    }
+
     return isEquals;
   }
 
@@ -79,8 +90,6 @@ public class ChangePasswordPresenter {
     if (!isEquals) {
       throw new Exception("A senha atual inserida esta incorreta!");
     }
-
-    
 
     return isEquals;
   }

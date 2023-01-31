@@ -27,6 +27,7 @@ public class Main {
         try {
             Dotenv dotenv = Dotenv.configure().load();
             UserDAOSQLite userDAO = new UserDAOSQLite();
+            ValidadorSenha validadorSenha = new ValidadorSenha();
 
             NotificationRepositorySQLite notificationRepository = new NotificationRepositorySQLite();
             NotificationCommand notificationCommand = new NotificationSendCommand(notificationRepository, userDAO);
@@ -34,9 +35,9 @@ public class Main {
             EncryptorPassword encryptorPassword = new EncryptorPassword(dotenv);
 
             MainWindowPresenter mainWindowPresenter = new MainWindowPresenter(notificationRepository, userDAO,
-                    notificationCommand, encryptorPassword);
+                    notificationCommand, encryptorPassword, validadorSenha);
 
-            new SignPresenter(userDAO, mainWindowPresenter, encryptorPassword, new ValidadorSenha());
+            new SignPresenter(userDAO, mainWindowPresenter, encryptorPassword, validadorSenha);
 
             userDAO.addObserver(Session.getInstance());
             userDAO.addObserver(mainWindowPresenter);
