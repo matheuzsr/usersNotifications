@@ -2,6 +2,7 @@ package com.usersnotifications.presenter;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 
 import com.usersnotifications.model.Notification;
+import com.usersnotifications.observer.notification.NotificationReceivedObserver;
 import com.usersnotifications.presenter.notification.NotificationPresenter;
 import com.usersnotifications.utils.LoggerService;
 import com.usersnotifications.view.NotificationListView;
@@ -18,7 +20,7 @@ import com.usersnotifications.business.Session;
 import com.usersnotifications.data.dao.UserDAO;
 import com.usersnotifications.data.repository.NotificationRepository;
 
-public class NotificationListPresenter {
+public class NotificationListPresenter implements NotificationReceivedObserver {
   private NotificationListView view;
   private DefaultTableModel table;
   private NotificationRepository repository;
@@ -103,7 +105,7 @@ public class NotificationListPresenter {
     notification.setDescription(description);
 
     try {
-      if (this.repository.read(notificationId)) {
+      if (this.repository.read(notificationId, Session.getInstance().getUser().getIdUser())) {
         LoggerService.getInstance().write(LoggerService.READING_NOTIFICATION, "Id notificação lida: " + notificationId,
             Session.getInstance().getUser().getName());
 
@@ -126,6 +128,11 @@ public class NotificationListPresenter {
 
   public NotificationListView getView() {
     return view;
+  }
+
+  @Override
+  public void update(List<Notification> notifications) {
+    this.carregarTabela(notifications);
   }
 
 }

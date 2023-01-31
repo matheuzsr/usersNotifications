@@ -15,7 +15,7 @@ public interface NotificationRepository {
     
     public Collection<Notification> getSentAll(int userId) throws Exception;
 
-    public boolean read(int notificationId) throws Exception;
+    public boolean read(int notificationId, int userId) throws Exception;
 
     public boolean delete(int notificationId) throws Exception;
 }

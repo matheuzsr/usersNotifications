@@ -6,6 +6,7 @@ package com.usersnotifications.data.repository;
 
 import com.usersnotifications.data.connection.SQLiteDB;
 import com.usersnotifications.model.Notification;
+import com.usersnotifications.observer.notification.NotificationReceivedObservable;
 import com.usersnotifications.dto.UserDTO;
 
 import java.time.LocalDate;
@@ -16,9 +17,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-public class NotificationRepositorySQLite implements NotificationRepository {
+public class NotificationRepositorySQLite extends NotificationReceivedObservable implements NotificationRepository {
     private final SQLiteDB BD = new SQLiteDB();
-    
+
     @Override
     public void add(Notification notification) throws Exception {
         BD.conectar();
@@ -102,7 +103,7 @@ public class NotificationRepositorySQLite implements NotificationRepository {
     }
 
     @Override
-    public boolean read(int notificationId) throws Exception {
+    public boolean read(int notificationId, int userId) throws Exception {
         StringBuilder str = new StringBuilder();
 
         BD.conectar();
@@ -115,6 +116,7 @@ public class NotificationRepositorySQLite implements NotificationRepository {
         BD.atualizar(str.toString());
         BD.close();
 
+        this.notifyReceivedObservers((List<Notification>) this.getReceivedAll(userId));
         return true;
     }
 
@@ -123,4 +125,10 @@ public class NotificationRepositorySQLite implements NotificationRepository {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    protected void notifyReceivedObservers(List<Notification> notifications) {
+        this.observerList.forEach(observer -> {
+            observer.update(notifications);
+        });
+    }
 }
