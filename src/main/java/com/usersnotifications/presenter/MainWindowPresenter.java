@@ -4,7 +4,7 @@ import com.usersnotifications.business.Encryptor.EncryptorPassword;
 import com.usersnotifications.business.Session;
 import com.usersnotifications.command.notification.NotificationCommand;
 import com.usersnotifications.data.dao.UserDAO;
-import com.usersnotifications.data.repository.NotificationRepository;
+import com.usersnotifications.data.repository.NotificationRepositorySQLite;
 import com.usersnotifications.dto.UserDTO;
 import com.usersnotifications.model.User;
 import com.usersnotifications.observer.user.CurrentUserObserver;
@@ -17,12 +17,12 @@ import javax.swing.JOptionPane;
 public class MainWindowPresenter implements CurrentUserObserver {
 
     private MainWindowView view;
-    private NotificationRepository notificationRepository;
+    private NotificationRepositorySQLite notificationRepository;
     private UserDAO userDAO;
     private NotificationCommand notificationCommand;
     private EncryptorPassword encryptorPassword;
 
-    public MainWindowPresenter(NotificationRepository notificationRepository, UserDAO userDAO,
+    public MainWindowPresenter(NotificationRepositorySQLite notificationRepository, UserDAO userDAO,
             NotificationCommand notificationCommand, EncryptorPassword encryptorPassword) {
         this.notificationRepository = notificationRepository;
         this.userDAO = userDAO;
@@ -51,6 +51,8 @@ public class MainWindowPresenter implements CurrentUserObserver {
             try {
                 NotificationListPresenter presenter = new NotificationListPresenter(this.notificationRepository,
                         this.userDAO);
+
+            notificationRepository.addObserver(presenter);
 
                 showPanel(presenter.getView(), false, false);
             } catch (Exception ex) {

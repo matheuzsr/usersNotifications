@@ -80,6 +80,8 @@ public class ChangePasswordPresenter {
       throw new Exception("A senha atual inserida esta incorreta!");
     }
 
+    
+
     return isEquals;
   }
 

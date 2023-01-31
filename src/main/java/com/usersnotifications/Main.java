@@ -28,7 +28,7 @@ public class Main {
             Dotenv dotenv = Dotenv.configure().load();
             UserDAOSQLite userDAO = new UserDAOSQLite();
 
-            NotificationRepository notificationRepository = new NotificationRepositorySQLite();
+            NotificationRepositorySQLite notificationRepository = new NotificationRepositorySQLite();
             NotificationCommand notificationCommand = new NotificationSendCommand(notificationRepository, userDAO);
 
             EncryptorPassword encryptorPassword = new EncryptorPassword(dotenv);
