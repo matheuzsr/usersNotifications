@@ -4,12 +4,14 @@ import java.util.Properties;
 
 import com.ufes.exercicio.log.CSVLogAdapter;
 import com.ufes.exercicio.log.JSONLogAdapter;
+import com.ufes.exercicio.log.LogAdapter;
 import com.ufes.exercicio.model.RegistroLog;
 import com.ufes.exercicio.services.LogService;
 
 public class LoggerService {
   private static LoggerService instance;
   private static LogService logService;
+  private PropertiesConfiguration propertiesConfiguration;
   private String filePath = "./log/log";
 
   public static String INCLUDE = "INCLUSAO";
@@ -18,16 +20,16 @@ public class LoggerService {
   public static String READING_NOTIFICATION = "LEITURA NOTIFICACAO";
 
   private LoggerService() {
-    logService = new LogService(new JSONLogAdapter(this.filePath));
+    this.propertiesConfiguration = new PropertiesConfiguration();
+    logService = new LogService(null);
+
+    String logType = propertiesConfiguration.getProperty("FILETYPE_LOG");
+    this.setLogService(logType);
   }
 
   public static LoggerService getInstance() throws Exception {
     if (instance == null) {
       instance = new LoggerService();
-    }
-
-    if (logService == null) {
-      throw new Exception("Selecione usando o método `setLogService` ");
     }
 
     return instance;
@@ -39,14 +41,24 @@ public class LoggerService {
 
   public void setLogService(String type) {
     if (type.equalsIgnoreCase("csv")) {
-      logService.setLog(new CSVLogAdapter(this.filePath));
+      this.setAdapterLog(new CSVLogAdapter(this.filePath), type);
 
       return;
     } else if (type.equalsIgnoreCase("json")) {
-      logService.setLog(new JSONLogAdapter(this.filePath));
+      this.setAdapterLog(new JSONLogAdapter(this.filePath), type);
 
       return;
     }
-    throw new RuntimeException("Informe um tipo válido de log: csv ou json");
+  }
+
+  private void setAdapterLog(LogAdapter adapter, String type) {
+    try {
+      this.propertiesConfiguration.setProperty("FILETYPE_LOG", type);
+      logService.setLog(adapter);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
   }
 }

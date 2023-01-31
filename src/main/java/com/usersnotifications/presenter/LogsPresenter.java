@@ -5,6 +5,7 @@
 package com.usersnotifications.presenter;
 
 import com.usersnotifications.utils.LoggerService;
+import com.usersnotifications.utils.PropertiesConfiguration;
 import com.usersnotifications.view.LogsView;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
@@ -16,15 +17,20 @@ import javax.swing.JOptionPane;
 public class LogsPresenter {
 
     private LogsView view;
+    private PropertiesConfiguration propertiesConfiguration;
 
     public LogsPresenter() {
         this.view = new LogsView();
+        this.propertiesConfiguration = new PropertiesConfiguration();
         this.screenConfiguration();
     }
 
-    public void screenConfiguration() {
+    public void screenConfiguration() { 
         this.view.getCbLog().addItem("JSON");
         this.view.getCbLog().addItem("CSV");
+        
+        String logType =propertiesConfiguration.getProperty("FILETYPE_LOG");
+        this.view.getCbLog().setSelectedItem(logType);
 
         this.view.getBtSave().addActionListener((ActionEvent ae) -> {
             this.save();
